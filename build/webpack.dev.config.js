@@ -70,6 +70,13 @@ let configure = {
                 }
             },
             {
+                enforce: "pre",
+                test: /(\.jsx|\.js)$/,
+                exclude:/node_modules/,
+                include: /src/,
+                loader: "eslint-loader",
+            },
+            {
                 test: /(\.jsx|\.js)$/,
                 exclude: /node_modules/,
                 use: {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import styled from 'styled-components';
 import './App.css';
@@ -17,9 +17,10 @@ const Wrapper = styled.section`
   }
 `;
 const Button = styled.button.attrs({
-    className:'test-btn'
+    className: 'test-btn'
 })`
   width: 100px;
+  height: 30px;
   color: white;
   background: skyblue;
   cursor: pointer;
@@ -27,12 +28,15 @@ const Button = styled.button.attrs({
 class App extends Component {
     render() {
         return (
-            <div className="App" style={{color: 'red',fontSize:'18px'}}>
+            <div className="App" style={{ color: 'red', fontSize: '18px' }}>
                 <header className="App-header">
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
                 <Wrapper className="App-wra">
                     <p>你好我们测试</p>
+                    <div>
+                        <Button>按钮</Button>
+                    </div>
                 </Wrapper>
                 <p className="App-intro">
                     To get started, edit <code>src/App.js</code> and save to reload. 你好

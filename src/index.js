@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import { injectGlobal } from 'styled-components';
-//全局公共样式
 injectGlobal`
     .slide-fade-enter-active {
         transition: all 3s ease;
@@ -167,10 +166,12 @@ injectGlobal`
         margin: 0 auto;
     }
 `;
-import App from './App'
+
+// import App from './App';
+import Header from './Components/header';
 ReactDOM.render(
     <AppContainer>
-        <App/>
+        <Header appTitle="react测试" />
     </AppContainer>,
     document.getElementById('app')
 );
