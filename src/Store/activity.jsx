@@ -21,7 +21,7 @@ export default class Activity {
             total: 0, // 总共数据条数
             recordListNum: 0, // 开始于第几条
             haiMoreData: true, // 是否还有更多数据
-            detailItem: {} // 更新活动详情数据
+            detailItem: null // 更新活动详情数据
         };
     }
     /**
@@ -57,5 +57,24 @@ export default class Activity {
                     }, 1000);
                 }
             });
+    }
+    /**
+     * 获取活动详情
+     * activityId: 活动id
+     */
+    @action getActivityDetail(activityId) {
+        return new Promise((resolve, reject) => {
+            request
+                .get(myInterface.getActivityDetail + activityId)// 接收传递过来的 活动id
+                .use(jsonp({
+                    timeout: 3000
+                }))
+                .end((err, res) => {
+                    if (!err) {
+                        this.actState.detailItem = res.body;
+                        resolve(res.body);
+                    }
+                });
+        });
     }
 }

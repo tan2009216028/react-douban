@@ -69,7 +69,10 @@ class HomeList extends React.Component {
                                 <li key={index} >
                                     <Link to={{
                                         pathname: '/detailPage',
-                                        search: `?activityId=${item.id}`
+                                        search: `?activityId=${item.id}`,
+                                        query: {
+                                            activityId: `${item.id}`
+                                        }
                                     }} >
                                         <div className="db-feed-content">
                                             <div className="db-feed-title">
