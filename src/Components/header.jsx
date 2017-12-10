@@ -1,13 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const HeadBar = styled.div.attrs({
-    className: 'flexible-box'
-})`
+const HeadBar = styled.div`
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
+        display: flex;
         align-items: center;
         padding: 0 1.8rem;
         height: 4.8rem;
@@ -30,6 +30,7 @@ const HeadBar = styled.div.attrs({
         }
         .db-tab-list{
             display: flex;
+            flex: 1;
             padding-top: 0.5rem;
             justify-content: flex-end;
         }
@@ -55,21 +56,21 @@ export default class Header extends React.Component {
         return (
             <HeadBar>
                 <h1 className="db-title">
-                    <a>{this.props.appTitle || '豆瓣'}</a>
+                    <Link to="/" >{this.props.appTitle || '豆瓣'} {this.props.title}</Link>
                 </h1>
-                <div className="db-tab-list adaptive-box-flex">
+                <div className="db-tab-list">
                     <ul className="clearFix ul-li-float">
                         <li>
-                            电影
+                            <Link to="/moviePage" style={{ color: '#2384E8' }}>电影</Link>
                         </li>
                         <li>
-                            图书
+                            <Link to="/bookPage" style={{ color: '#9F7860' }}>图书</Link>
                         </li>
                         <li>
-                            广播
+                            <Link to="/broadcastPage" style={{ color: '#E4A813' }}>广播</Link>
                         </li>
                         <li>
-                            小组
+                            <Link to="/groupPage" style={{ color: '#2AB8CC' }}>小组</Link>
                         </li>
                         <li>
                             <span className="db-search"></span>
@@ -80,3 +81,4 @@ export default class Header extends React.Component {
         );
     }
 }
+

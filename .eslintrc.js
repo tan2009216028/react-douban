@@ -10,6 +10,7 @@ module.exports = {
         // ReactDOM: false
     },
     rules: {
+        'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0// 开发环境允许用debugger
         // 这里填入你的项目需要的个性化配置，比如：
         //
         // // @fixable 一个缩进必须用两个空格替代
