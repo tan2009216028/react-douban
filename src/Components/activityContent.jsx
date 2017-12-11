@@ -181,7 +181,13 @@ export default class ActivityContentLayout extends React.Component {
 
     }
     componentDidMount() {
-        this.store.getActivityDetail(this.props.location.query.activityId).then(res => {
+        let activityId;
+        if (this.props.location.query) {
+            activityId = this.props.location.query.activityId;
+        } else {
+            activityId = this.props.location.search.split('?')[1].split('=')[1];
+        }
+        this.store.getActivityDetail(activityId).then(res => {
             this.activityDetail = this.store.actState.detailItem;
             this.activityThisContent = this.activityDetail.content;
             this.setState({

@@ -44,9 +44,11 @@ export default class Activity {
      * count: 5
      */
     @action getActivityList() {
-        request.get(myInterface.getActivityList + '?loc=' + myInterface.cityId + '&start=' + this.actState.step + '&count=' + myInterface.count)
+        request
+            .get(myInterface.getActivityList + '?loc=' + myInterface.cityId + '&start=' + this.actState.step + '&count=' + myInterface.count)
             .use(jsonp({
-                timeout: 3000
+                timeout: 3000,
+                callbackName: 'someOtherName'
             }))
             .end((err, res) => {
                 if (!err) {
