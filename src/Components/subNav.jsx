@@ -26,7 +26,7 @@ const SubNav = styled.div.attrs({
             white-space: nowrap;
             word-wrap: normal;
         }`;
-
+// 无状态组件
 const SubNavObj = (props) => {
     return (
         <SubNav>

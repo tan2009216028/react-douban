@@ -18,9 +18,10 @@ export default class HomeController extends React.Component {
         this.store.getActivityList();
     }
     render() {
+        const { match } = this.props;
         return (
             <HomeControllerStyle>
-                <SubNav {...this.props} />
+                <SubNav match={match} />
                 <InfiniteScroll
                     pageStart={0}
                     loadMore={this.getLoadMore.bind(this)}

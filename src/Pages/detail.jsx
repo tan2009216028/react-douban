@@ -8,10 +8,11 @@ import Banner from '../Components/banner';
 import ActivityContent from '../Components/activityContent';
 export default class Detail extends React.Component {
     render() {
+        const { location } = this.props;
         return (
             <div className="db-detail-content" >
                 <Banner title="每天看点好内容" />
-                <ActivityContent {...this.props} />
+                <ActivityContent location={location} />
             </div>
         );
     }
