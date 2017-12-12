@@ -5,12 +5,13 @@
  */
 import React from 'react';
 import Banner from '../Components/banner';
-
+import ActivityContent from '../Components/activityContent';
 export default class Detail extends React.Component {
     render() {
         return (
             <div className="db-detail-content" >
                 <Banner title="每天看点好内容" />
+                <ActivityContent {...this.props} />
             </div>
         );
     }
