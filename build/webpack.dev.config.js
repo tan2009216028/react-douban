@@ -6,18 +6,17 @@
  */
 let webpack = require('webpack');
 let path = require('path');
-let glob = require('glob');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 let FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 let configure = {
     entry: {
-        app:"./src/index.js",
+        app: './src/index.js',
         vendor: ['react', 'react-dom', 'react-router-dom']
     },
     output: {
-        path: path.resolve(__dirname, "dist"),
+        path: path.resolve(__dirname, 'dist'),
         publicPath: '/',
-        filename: "[name].js"
+        filename: '[name].js'
     },
     resolve: {
         extensions: ['.js', '.json', '.jsx','.less','jsonp', '.scss', '.css']
@@ -70,17 +69,17 @@ let configure = {
                 }
             },
             {
-                enforce: "pre",
+                enforce: 'pre',
                 test: /(\.jsx|\.js)$/,
-                exclude:/node_modules/,
+                exclude: /node_modules/,
                 include: /src/,
-                loader: "eslint-loader",
+                loader: 'eslint-loader',
             },
             {
                 test: /(\.jsx|\.js)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader"
+                    loader: 'babel-loader'
                 }
             },
             {
@@ -96,8 +95,9 @@ let configure = {
             }
         ]
     },
+    devtool: 'cheap-module-eval-source-map',// 打包构建信息
     plugins: [
-        new webpack.NoEmitOnErrorsPlugin(),//跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误。
+        new webpack.NoEmitOnErrorsPlugin(), // 跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误。
         new webpack.HotModuleReplacementPlugin(),
         new FriendlyErrorsPlugin(),
         new HtmlWebpackPlugin({
@@ -107,5 +107,5 @@ let configure = {
             inject: true
         })
     ]
-}
+};
 module.exports = configure;

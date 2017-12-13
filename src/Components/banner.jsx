@@ -45,24 +45,18 @@ const BannerStyle = styled.div`
         }
 `;
 
-export default class Banner extends React.Component {
-    constructor(props) {
-        super(props);
-        this.title = this.props['title'] || '打开App, 浏览更多';
-    }
-    render() {
-        return (
-            <BannerStyle className="db-banner">
-                <div className="db-banner-content">
-                    <div className="db-banner-title">
-                        <span>{this.title}</span>
-                    </div>
-                    <div className="db-banner-button">
-                        <a className="download">极速下载</a>
-                        <a className="open">打开</a>
-                    </div>
-                </div>
-            </BannerStyle>
-        );
-    }
-}
+const Banner = (props) => (
+    <BannerStyle className="db-banner">
+        <div className="db-banner-content">
+            <div className="db-banner-title">
+                <span>{props['title'] || '打开App, 浏览更多'}</span>
+            </div>
+            <div className="db-banner-button">
+                <a className="download">极速下载</a>
+                <a className="open">打开</a>
+            </div>
+        </div>
+    </BannerStyle>
+);
+
+export default Banner;

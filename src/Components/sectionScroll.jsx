@@ -94,7 +94,7 @@ const SectionStyle = styled.section.attrs({
 
 export default class SectionScroll extends React.Component {
     state = {
-        showType:false
+        showType: false
     };
     constructor(props) {
         super(props);

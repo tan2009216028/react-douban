@@ -14,7 +14,7 @@ const ControlCenter = styled.div`
 const Routes = () => (
     <Router>
         <div className="react-douban">
-            <HeaderBar appTitle="react测试" title="你好" />
+            <HeaderBar appTitle="react测试" title="我不好" />
             <ControlCenter>
                 <Switch>
                     <Route exact path="/" component={Home} />

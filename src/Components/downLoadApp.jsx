@@ -42,21 +42,17 @@ const DownLoadStyle = styled.div.attrs({
             color: #42bd56;
         }
 `;
-
-export default class DownLoadApp extends React.Component {
-    downUrl = 'https://www.douban.com/doubanapp/card/log?category=diary&cid=631833427&action=click_download&ref=http%3A//www.douban.com/doubanapp/app%3Fchannel%3Dcard_diary%26direct_dl%3D1';
-    render() {
-        return (
-            <DownLoadStyle class="db-download-app" >
-                <div className="db-download-info">
-                    <span className="db-down-img" ></span>
-                    <div className="info-content" >
-                        <strong>豆瓣</strong>
-                        <p>我们的精神角落</p>
-                    </div>
-                </div>
-                <a href={this.downUrl}>去 App Store 免费下载 iOS 客户端</a>
-            </DownLoadStyle>
-        );
-    }
-}
+const URL = 'https://www.douban.com/doubanapp/card/log?category=diary&cid=631833427&action=click_download&ref=http%3A//www.douban.com/doubanapp/app%3Fchannel%3Dcard_diary%26direct_dl%3D1';
+const DownLoadApp = () => (
+    <DownLoadStyle class="db-download-app" >
+        <div className="db-download-info">
+            <span className="db-down-img" ></span>
+            <div className="info-content" >
+                <strong>豆瓣</strong>
+                <p>我们的精神角落</p>
+            </div>
+        </div>
+        <a href={URL}>去 App Store 免费下载 iOS 客户端</a>
+    </DownLoadStyle>
+);
+export default DownLoadApp;
