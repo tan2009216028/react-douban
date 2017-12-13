@@ -7,6 +7,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
 import DownLoadApp from '../Components/downLoadApp';
+import MovieScroll from '../Components/sectionScroll';
 const MovieStyle = styled.div.attrs({
     className: 'db-movie-content'
 })`
@@ -143,6 +144,18 @@ export default class MoviePage extends React.Component {
         return (
             <MovieStyle>
                 <div className="db-movie-classify">
+                    {
+                       this.state.showType && (
+                           <MovieScroll
+                               title="影院热映"
+                               type="movie"
+                               sectionList={this.store.hotMovies}
+                               toMoreUrl=`${this.state.baseUrl}movie/nowintheater?loc_id=118318`></MovieScroll>
+                           <MovieScroll title="影院热映" type="movie" sectionList={this.store.topMovies}></MovieScroll>
+                           <MovieScroll title="影院热映" type="movie" sectionList={this.store.newMovies}></MovieScroll>
+                       )
+                    }
+
                     <h2>分类浏览</h2>
                     <ul className="clearFix">
                         {

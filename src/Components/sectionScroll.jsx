@@ -6,6 +6,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Loading from '../Components/loading';
+import { Link } from 'react-router-dom';
+
 const SectionStyle = styled.section.attrs({
     className: 'db-movie-item'
 })`
@@ -98,19 +100,53 @@ export default class SectionScroll extends React.Component {
     };
     constructor(props) {
         super(props);
-
     }
     render() {
+        const {
+            title,
+            type,
+            toMoreUrl,
+            sectionList
+        } = this.props;
+        let pathName = 'movieDescribe';
+        switch (type){
+            case "movie":
+                pathName = 'movieDescribe';
+                break;
+            case "book":
+                pathName = 'bookDescribe';
+                break;
+            default:
+                pathName = 'movieDescribe';
+        }
         return(
             <SectionStyle>
                 <header>
-                    <h2>{this.props.title}</h2>
+                    <h2>{title}</h2>
                     {
-                        this.props.type != 'sectionTags' && <a href={this.props.type.toMoreUrl || ''}>更多</a>
+                        type != 'sectionTags' && <a href={toMoreUrl || ''}>更多</a>
                     }
                 </header>
                 {!this.state.showType && <Loading />}
+                <div className="db-movie-list">
+                    <ul>
+                        {
+                            sectionList.length && sectionList.map((item, index) => {
+                                <Link to={{
+                                    pathname: {pathName},
+                                    search: `?file=${item.id}`,
+                                    query: {
+                                        file: `${item.id}`
+                                    }
+                                }}>
+                                    <img src="item.images.large" alt="item.title" />
+                                    <p className="db-movie-title">{item.title}</p>
+                                </Link>
+                            })
+                        }
+                    </ul>
+                </div>
             </SectionStyle>
-        )
+        );
     }
 }
