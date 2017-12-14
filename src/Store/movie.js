@@ -15,6 +15,7 @@ export default class Movie {
     @observable state;
     constructor() {
         this.state = {
+            showType: false, // 是否开始加载
             hotMovies: [], // 热门上映电影
             topMovies: [], // 免费排行榜映电影
             newMovies: [], // 新电影电影
@@ -66,7 +67,7 @@ export default class Movie {
         };
     }
     @action
-    getMovie(type, payload) {
+    changeMovieState(type, payload) {
         this.state[type] = payload;
     }
     /**
@@ -75,36 +76,49 @@ export default class Movie {
      */
     @action
     getMovieList() {
-        request
-            .get(myInterface.getShowMovieList + '?count=10&city=成都')
-            .use(jsonp({
-                timeout: 3000
-            }))
-            .end((err, res) => {
-                if (!err) {
-                    this.getMovie('hotMovies', res.body.subjects);
-                }
-            });
-        request
-            .get(myInterface.getWillShowMovieList + '?count=10&city=成都')
-            .use(jsonp({
-                timeout: 3000
-            }))
-            .end((err, res) => {
-                if (!err) {
-                    this.getMovie('newMovies', res.body.subjects);
-                }
-            });
-        request
-            .get(myInterface.getTop250MovieList + '?count=10')
-            .use(jsonp({
-                timeout: 3000
-            }))
-            .end((err, res) => {
-                if (!err) {
-                    this.getMovie('topMovies', res.body.subjects);
-                }
-            });
+        let getShowMovieList = new Promise((resolve, reject) => {
+            request
+                .get(myInterface.getShowMovieList + '?count=10&city=成都')
+                .use(jsonp({
+                    timeout: 3000
+                }))
+                .end((err, res) => {
+                    if (!err) {
+                        this.changeMovieState('hotMovies', res.body.subjects);
+                        resolve(res.body);
+                    }
+                });
+        });
+        let getWillShowMovieList = new Promise((resolve, reject) => {
+            request
+                .get(myInterface.getWillShowMovieList + '?count=10&city=成都')
+                .use(jsonp({
+                    timeout: 3000
+                }))
+                .end((err, res) => {
+                    if (!err) {
+                        this.changeMovieState('newMovies', res.body.subjects);
+                        resolve(res.body);
+                    }
+                });
+        });
+        let getTop250MovieList = new Promise((resolve, reject) => {
+            request
+                .get(myInterface.getTop250MovieList + '?count=10')
+                .use(jsonp({
+                    timeout: 3000
+                }))
+                .end((err, res) => {
+                    if (!err) {
+                        this.changeMovieState('topMovies', res.body.subjects);
+                        resolve(res.body);
+                    }
+                });
+        });
+        Promise.all([getShowMovieList, getWillShowMovieList, getTop250MovieList]).then((result) => {
+            this.changeMovieState('showType', true);
+        });
+
     }
 
 }

@@ -62,7 +62,6 @@ export default class MoviePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showType: true,
             baseUrl: 'https://m.douban.com/',
             classifiedViewList: [
                 {
@@ -143,19 +142,17 @@ export default class MoviePage extends React.Component {
     render() {
         return (
             <MovieStyle>
+                {
+                    this.store.state.showType && (
+                        <MovieScroll
+                            title="影院热映"
+                            type="movie"
+                            sectionList={this.store.state.hotMovies}
+                            toMoreUrl={`${this.state.baseUrl}movie/nowintheater?loc_id=118318`} >
+                        </MovieScroll>
+                    )
+                }
                 <div className="db-movie-classify">
-                    {
-                       this.state.showType && (
-                           <MovieScroll
-                               title="影院热映"
-                               type="movie"
-                               sectionList={this.store.hotMovies}
-                               toMoreUrl=`${this.state.baseUrl}movie/nowintheater?loc_id=118318`></MovieScroll>
-                           <MovieScroll title="影院热映" type="movie" sectionList={this.store.topMovies}></MovieScroll>
-                           <MovieScroll title="影院热映" type="movie" sectionList={this.store.newMovies}></MovieScroll>
-                       )
-                    }
-
                     <h2>分类浏览</h2>
                     <ul className="clearFix">
                         {

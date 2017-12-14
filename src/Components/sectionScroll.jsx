@@ -6,6 +6,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Loading from '../Components/loading';
+import Rating from '../Components/rating';
 import { Link } from 'react-router-dom';
 
 const SectionStyle = styled.section.attrs({
@@ -95,12 +96,6 @@ const SectionStyle = styled.section.attrs({
 `;
 
 export default class SectionScroll extends React.Component {
-    state = {
-        showType: false
-    };
-    constructor(props) {
-        super(props);
-    }
     render() {
         const {
             title,
@@ -109,39 +104,48 @@ export default class SectionScroll extends React.Component {
             sectionList
         } = this.props;
         let pathName = 'movieDescribe';
-        switch (type){
-            case "movie":
+        switch (type) {
+            case 'movie':
                 pathName = 'movieDescribe';
                 break;
-            case "book":
+            case 'book':
                 pathName = 'bookDescribe';
                 break;
             default:
                 pathName = 'movieDescribe';
         }
-        return(
+        return (
             <SectionStyle>
                 <header>
                     <h2>{title}</h2>
                     {
-                        type != 'sectionTags' && <a href={toMoreUrl || ''}>更多</a>
+                        type !== 'sectionTags' && <a href={toMoreUrl || ''}>更多</a>
                     }
                 </header>
-                {!this.state.showType && <Loading />}
+                {!sectionList.length && <Loading />}
                 <div className="db-movie-list">
                     <ul>
                         {
                             sectionList.length && sectionList.map((item, index) => {
-                                <Link to={{
-                                    pathname: {pathName},
-                                    search: `?file=${item.id}`,
-                                    query: {
-                                        file: `${item.id}`
-                                    }
-                                }}>
-                                    <img src="item.images.large" alt="item.title" />
-                                    <p className="db-movie-title">{item.title}</p>
-                                </Link>
+                                return (
+                                    <li key={`${type}-${index}`}>
+                                        <Link to={{
+                                            pathname: { pathName },
+                                            search: `?file=${item.id}`,
+                                            query: {
+                                                file: `${item.id}`
+                                            }
+                                        }}>
+                                            <img src={item.images.large} alt={item.title} />
+                                            <p className="db-movie-title">{item.title}</p>
+                                            {
+                                                item.rating && <Rating rating={item.rating} />
+                                            }
+
+                                        </Link>
+                                    </li>
+
+                                );
                             })
                         }
                     </ul>
