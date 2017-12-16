@@ -29,4 +29,65 @@ const INTERFACE = {
     getBroadcastList: lineDomain + '/rexxar/api/v2/status/anonymous_timeline', // 获取非登录用户广播
     getRapapiList: rapapiDomain + '/mockjsdata/24739/group'  // 模拟豆瓣小组接口
 };
+/*
+ * 本地存储
+ * @type: 是否支持本地存储
+ */
+class DataLocalStorage {
+    constructor(type) {
+        this.localStorage = window.localStorage || null;
+        this.isSupport = this.localStorage ? true : false;
+        type && (this.isSupport = false);
+    }
+    setLocalStorageData(key, data) {
+        if (this.isSupport) {
+            this.localStorage.setItem(key, JSON.stringify(data));
+        }
+    }
+    getLocalStorageData(key, callback) {
+        let getData = this.localStorage.getItem(key);
+        if (this.localStorage.getItem(key)) {
+            callback(true, JSON.parse(getData));
+        }
+        else {
+            callback(false);
+        }
+    }
+}
+
+
+/*
+ * 生成唯一uuid
+ * @type: 是否支持本地存储
+ * 8 character ID (base=2)
+ * getUuid(8, 2)  //  "01001010"
+ * 8 character ID (base=10)
+ * getUuid(8, 10) // "47473046"
+ * 8 character ID (base=16)
+ * getUuid(8, 16) // "098F4D35"
+ *
+ */
+window.getUuid = function(len, radix) {
+    let chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+    let uuid = [];
+    let thisRadix = radix;
+    let i;
+    thisRadix = thisRadix || chars.length;
+    if (len) {
+        for (i = 0; i < len; i++) uuid[i] = chars[0 | Math.random() * thisRadix];
+    } else {
+        let r;
+        uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+        uuid[14] = '4';
+        for (i = 0; i < 36; i++) {
+            if (!uuid[i]) {
+                r = 0 | Math.random() * 16;
+                uuid[i] = chars[(i === 19) ? (r & 0x3) | 0x8 : r];
+            }
+        }
+    }
+    return uuid.join('');
+};
 export default INTERFACE;
+export let changeDataLocalStorage = new DataLocalStorage();
+

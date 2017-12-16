@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
 import DownLoadApp from '../Components/downLoadApp';
 import MovieScroll from '../Components/sectionScroll';
+import UUID from '../Utils/util';
 const MovieStyle = styled.div.attrs({
     className: 'db-movie-content'
 })`
@@ -172,7 +173,7 @@ export default class MoviePage extends React.Component {
                         {
                             this.state.classifiedViewList.length && this.state.classifiedViewList.map((item, index) => {
                                 return (
-                                    <li key={index} >
+                                    <li key={UUID.uuid810} >
                                         <a href={this.state.baseUrl + item.href} >
                                             {item.title}<span></span>
                                         </a>

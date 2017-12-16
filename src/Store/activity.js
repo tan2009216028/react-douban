@@ -5,9 +5,8 @@
  * @date: 2017/12/9 17:36
  */
 import { action, observable, useStrict } from 'mobx';
-import request from 'superagent';
-import jsonp from 'superagent-jsonp';
-import myInterface from './interface';
+import getJsonpRequest from '../Utils/request';
+import myInterface, { changeDataLocalStorage } from './interface';
 // 启动严格模式
 useStrict(true);
 
@@ -44,23 +43,23 @@ export default class Activity {
      * count: 5
      */
     @action getActivityList() {
-        request
-            .get(myInterface.getActivityList + '?loc=' + myInterface.cityId + '&start=' + this.actState.step + '&count=' + myInterface.count)
-            // .get('//m.douban.com/rexxar/api/v2/recommend_feed?alt=json&next_date=2017-12-16&?loc=' + myInterface.cityId)
-            .use(jsonp({
-                timeout: 3000,
-                callbackName: 'someOtherName'
-            }))
-            .end((err, res) => {
-                if (!err) {
+        let getThisStep = this.actState.step;
+        changeDataLocalStorage.getLocalStorageData('getActivityList_' + getThisStep, (thisLocalState, data) => {
+            if (thisLocalState) {
+                this.getMoreData(data);
+            } else {
+                getJsonpRequest(myInterface.getActivityList + '?loc=' + myInterface.cityId + '&start=' + this.actState.step + '&count=' + myInterface.count, (res) => {
                     debugger;
                     console.log('react数据获取完毕');
                     console.log(res.body);
                     setTimeout(() => {
                         this.getMoreData(res.body);
+                        changeDataLocalStorage.setLocalStorageData('getActivityList_' + getThisStep, res.body);
                     }, 1000);
-                }
-            });
+                });
+            }
+        });
+
     }
     /**
      * 获取活动详情
@@ -68,17 +67,18 @@ export default class Activity {
      */
     @action getActivityDetail(activityId) {
         return new Promise((resolve, reject) => {
-            request
-                .get(myInterface.getActivityDetail + activityId)// 接收传递过来的 活动id
-                .use(jsonp({
-                    timeout: 3000
-                }))
-                .end((err, res) => {
-                    if (!err) {
+            changeDataLocalStorage.getLocalStorageData('getActivityDetail_' + activityId, (thisLocalState, data) => {
+                if (thisLocalState) {
+                    this.actState.detailItem = data;
+                    resolve(data);
+                } else {
+                    getJsonpRequest(myInterface.getActivityDetail + activityId, (res) => {
                         this.actState.detailItem = res.body;
+                        changeDataLocalStorage.setLocalStorageData('getActivityDetail_' + activityId, res.body);
                         resolve(res.body);
-                    }
-                });
+                    });
+                }
+            });
         });
     }
 }

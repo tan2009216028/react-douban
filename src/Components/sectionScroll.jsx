@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import Loading from '../Components/loading';
 import Rating from '../Components/rating';
 import { Link } from 'react-router-dom';
-
+import UUID from '../Utils/util';
 const SectionStyle = styled.section.attrs({
     className: 'db-movie-item'
 })`
@@ -135,7 +135,7 @@ export default class SectionScroll extends React.Component {
                         {
                             type === 'sectionTags' && sectionList.map((item, index) => {
                                 return (
-                                    <li key={`${type}-${index}`} className="db-find-area" style={
+                                    <li key={UUID.uuid810} className="db-find-area" style={
                                         {
                                             borderColor: item.color
                                         }
@@ -155,7 +155,7 @@ export default class SectionScroll extends React.Component {
                         {
                             type !== 'sectionTags' && sectionList.length > 0 && sectionList.map((item, index) => {
                                 return (
-                                    <li key={`${type}-${index}`}>
+                                    <li key={UUID.uuid810}>
                                         <Link to={{
                                             pathname: { pathName },
                                             search: `?file=${item.id}`,
@@ -168,7 +168,6 @@ export default class SectionScroll extends React.Component {
                                             {
                                                 item.rating && <Rating rating={item.rating} />
                                             }
-
                                         </Link>
                                     </li>
 
