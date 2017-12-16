@@ -12,20 +12,21 @@ import { Link } from 'react-router-dom';
 const SectionStyle = styled.section.attrs({
     className: 'db-movie-item'
 })`
-        padding-top: 1rem;
+        padding-top: .1rem;
         header{
+            display: flex;
             padding: 0 .16rem;
             height: .24rem;
             line-height: .24rem;
             h2{
-                display: inline-block;
+                flex: 1;
                 min-width: .4em;
                 font-size: .168rem;
                 font-weight: normal;
                 color: #111;
             }
             a{
-                float: right;
+                display: block;
                 font-size: .144rem;
                 color: #42bd56;
             }
@@ -33,8 +34,13 @@ const SectionStyle = styled.section.attrs({
         .db-movie-list{
             ul{
                 padding: 0.08rem 0;
+                max-height: 2.16rem;
+                overflow-y: hidden;
                 overflow-x: auto;
                 white-space: nowrap;
+                &.db-find-movie{
+                line-height: 0.52rem;
+                }
             }
             li{
                 display: inline-block;
@@ -65,15 +71,16 @@ const SectionStyle = styled.section.attrs({
             }
             .db-find-area:empty{
                 display: block;
-                height: 0.01rem;
-                border: 0;
                 margin: 0;
+                height: 0.01rem;
+                line-height: 0.01rem;
+                border: 0;
             }
             .db-find-area{
                 display: inline-block;
                 width: auto;
                 margin: 0 0 0.08rem .16rem;
-                font-size: 1.6rem;
+                font-size: .16rem;
                 border: solid 0.01rem;
                 border-radius: 0.04rem;
                 vertical-align: middle;
@@ -124,9 +131,29 @@ export default class SectionScroll extends React.Component {
                 </header>
                 {!sectionList.length && <Loading />}
                 <div className="db-movie-list">
-                    <ul>
+                    <ul className={type === 'sectionTags' ? 'db-find-movie' : ''}>
                         {
-                            sectionList.length && sectionList.map((item, index) => {
+                            type === 'sectionTags' && sectionList.map((item, index) => {
+                                return (
+                                    <li key={`${type}-${index}`} className="db-find-area" style={
+                                        {
+                                            borderColor: item.color
+                                        }
+                                    }>
+                                        {
+                                            !item.line && <a href={item.href} style={
+                                                {
+                                                    color: item.color
+                                                }
+                                            } >{item.title}</a>
+                                        }
+
+                                    </li>
+                                );
+                            })
+                        }
+                        {
+                            type !== 'sectionTags' && sectionList.length > 0 && sectionList.map((item, index) => {
                                 return (
                                     <li key={`${type}-${index}`}>
                                         <Link to={{

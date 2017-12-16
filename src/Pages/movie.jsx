@@ -11,12 +11,13 @@ import MovieScroll from '../Components/sectionScroll';
 const MovieStyle = styled.div.attrs({
     className: 'db-movie-content'
 })`
-        padding-top: 1rem;
+        padding-top: .1rem;
         .db-movie-classify{
             h2{
                 padding: 0 .16rem;
                 height: .26rem;
                 line-height: .26rem;
+                font-size: .168rem;
                 font-weight: normal;
             }
             ul{
@@ -142,16 +143,29 @@ export default class MoviePage extends React.Component {
     render() {
         return (
             <MovieStyle>
-                {
-                    this.store.state.showType && (
-                        <MovieScroll
-                            title="影院热映"
-                            type="movie"
-                            sectionList={this.store.state.hotMovies}
-                            toMoreUrl={`${this.state.baseUrl}movie/nowintheater?loc_id=118318`} >
-                        </MovieScroll>
-                    )
-                }
+                <MovieScroll
+                    title="影院热映"
+                    type="movie"
+                    sectionList={this.store.state.hotMovies}
+                    toMoreUrl={`${this.state.baseUrl}movie/nowintheater?loc_id=118318`} >
+                </MovieScroll>
+                <MovieScroll
+                    title="免费在线观影"
+                    type="movie"
+                    sectionList={this.store.state.topMovies}
+                    toMoreUrl={`${this.state.baseUrl}movie/watchonline`} >
+                </MovieScroll>
+                <MovieScroll
+                    title="新片速递"
+                    type="movie"
+                    sectionList={this.store.state.newMovies}
+                    toMoreUrl={`${this.state.baseUrl}movie/latest`} >
+                </MovieScroll>
+                <MovieScroll
+                    title="发现好电影"
+                    type="sectionTags"
+                    sectionList={this.store.state.movieTags}>
+                </MovieScroll>
                 <div className="db-movie-classify">
                     <h2>分类浏览</h2>
                     <ul className="clearFix">
