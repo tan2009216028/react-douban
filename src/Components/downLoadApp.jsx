@@ -8,14 +8,14 @@ import styled from 'styled-components';
 const DownLoadStyle = styled.div.attrs({
     className: 'db-download-app'
 })`
-        padding-bottom:2rem;
-        margin: 5rem 0 3rem 0;
+        padding-bottom:.2rem;
+        margin: .5rem 0 .3rem 0;
         text-align: center;
-        font-size: 1.5rem;
+        font-size: .15rem;
         .db-download-info{
             display: inline-block;
-            margin: 0 auto 1.5rem;
-            font-size: 1.4rem;
+            margin: 0 auto .15rem;
+            font-size: .14rem;
             color: #111;
             text-align: left;
             overflow: hidden;
@@ -23,18 +23,18 @@ const DownLoadStyle = styled.div.attrs({
                 overflow: hidden;
             }
             strong{
-                line-height: 2.8rem;
-                font-size: 2.4rem;
+                line-height: .28rem;
+                font-size: .24rem;
                 font-weight: normal;
             }
             .db-down-img{
                 float: left;
                 display: inline-block;
-                width: 4.8rem;
-                height: 4.8rem;
-                margin-right: 1.2rem;
+                width: .48rem;
+                height: .48rem;
+                margin-right: .12rem;
                 background: url("../../static/douban-app-img.png") no-repeat;
-                background-size: 4.8rem 4.8rem;
+                background-size: .48rem .48rem;
             }
         }
         a{

@@ -14,50 +14,50 @@ const SectionStyle = styled.section.attrs({
 })`
         padding-top: 1rem;
         header{
-            padding: 0 1.6rem;
-            height: 2.4rem;
-            line-height: 2.4rem;
+            padding: 0 .16rem;
+            height: .24rem;
+            line-height: .24rem;
             h2{
                 display: inline-block;
-                min-width: 4em;
-                font-size: 1.68rem;
+                min-width: .4em;
+                font-size: .168rem;
                 font-weight: normal;
                 color: #111;
             }
             a{
                 float: right;
-                font-size: 1.44rem;
+                font-size: .144rem;
                 color: #42bd56;
             }
         }
         .db-movie-list{
             ul{
-                padding: 0.8rem 0;
+                padding: 0.08rem 0;
                 overflow-x: auto;
                 white-space: nowrap;
             }
             li{
                 display: inline-block;
-                width: 10rem;
-                margin-left: 1rem;
+                width: 1rem;
+                margin-left: .1rem;
                 vertical-align: middle;
                 text-align: center;
                 img{
                     display: block;
-                    width: 10rem;
-                    height: 15rem;
+                    width: 1rem;
+                    height: 1.5rem;
                 }
             }
             li:first-child{
-                margin-left: 1.5rem;
+                margin-left: .15rem;
             }
             li:last-child{
-                margin-right: 1.5rem;
+                margin-right: .15rem;
             }
             .db-movie-title{
-                margin-top: 1rem;
-                line-height: 1.6rem;
-                font-size: 1.6rem;
+                margin-top: .1rem;
+                line-height: .16rem;
+                font-size: .16rem;
                 color: #111;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -65,31 +65,31 @@ const SectionStyle = styled.section.attrs({
             }
             .db-find-area:empty{
                 display: block;
-                height: 0.1rem;
+                height: 0.01rem;
                 border: 0;
                 margin: 0;
             }
             .db-find-area{
                 display: inline-block;
                 width: auto;
-                margin: 0 0 0.8rem 1.6rem;
+                margin: 0 0 0.08rem .16rem;
                 font-size: 1.6rem;
-                border: solid 0.1rem;
-                border-radius: 0.4rem;
+                border: solid 0.01rem;
+                border-radius: 0.04rem;
                 vertical-align: middle;
                 a{
                     display: block;
-                    height: 50px;
-                    line-height: 50px;
-                    padding: 0 1.55rem;
-                    letter-spacing: .1em;
+                    height: 0.5rem;
+                    line-height: 0.5rem;
+                    padding: 0 .155rem;
+                    letter-spacing: .01em;
                     text-align: center;
                 }
             }
         }
         .db-no-content{
-            line-height: 5rem;
-            font-size: 1.44rem;
+            line-height: .5rem;
+            font-size: .144rem;
             color: #42bd56;
             text-align: center;
         }

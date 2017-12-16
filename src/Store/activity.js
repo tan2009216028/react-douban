@@ -46,12 +46,14 @@ export default class Activity {
     @action getActivityList() {
         request
             .get(myInterface.getActivityList + '?loc=' + myInterface.cityId + '&start=' + this.actState.step + '&count=' + myInterface.count)
+            // .get('//m.douban.com/rexxar/api/v2/recommend_feed?alt=json&next_date=2017-12-16&?loc=' + myInterface.cityId)
             .use(jsonp({
                 timeout: 3000,
                 callbackName: 'someOtherName'
             }))
             .end((err, res) => {
                 if (!err) {
+                    debugger;
                     console.log('react数据获取完毕');
                     console.log(res.body);
                     setTimeout(() => {

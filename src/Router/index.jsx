@@ -7,7 +7,7 @@ import Detail from '../Pages/detail';
 import Movie from '../Pages/movie';
 
 const ControlCenter = styled.div`
-  margin-top: 4.8rem;
+  margin-top: .48rem;
   overflow-x: hidden;
 `;
 

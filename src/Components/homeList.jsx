@@ -2,21 +2,21 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 const HomeListStyle = styled.div`
-li{
-            padding: 2.5rem 1.8rem 2.5rem 0;
-            margin-left: 1.8rem;
-            border-bottom: 1px solid #e3e3e3;
+        li{
+            padding: .25rem .18rem .25rem 0;
+            margin-left: .18rem;
+            border-bottom: 0.01rem solid #e3e3e3;
         }
         .db-feed-content{
             display: flex;
             word-break: break-all;
         }
         .author{
-            padding-top: 1rem;
-            font-size: 1.2rem;
+            padding-top: .1rem;
+            font-size: .12rem;
             color: #ccc;
             span{
-                font-size: 1.2rem;
+                font-size: .12rem;
                 color: #ccc;
             }
         }
@@ -24,10 +24,10 @@ li{
             flex: 1;
         }
         .db-feed-content h3{
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.06rem;
             line-height: 1.41;
             text-align: justify;
-            font-size: 1.7rem;
+            font-size: .17rem;
             font-weight: 500;
             color: #494949;
             display: -webkit-box;
@@ -39,14 +39,14 @@ li{
             line-height: 1.5;
             text-align: justify;
             color: #aaa;
-            font-size: 1.2rem;
+            font-size: .12rem;
             display: -webkit-box;
             overflow: hidden;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 2;
         }
         .db-feed-content .db-feed-img{
-            margin-left: 2.5rem;
+            margin-left: .25rem;
             width: 25.6%;
         }
         .db-feed-img p{

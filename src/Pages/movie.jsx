@@ -14,23 +14,23 @@ const MovieStyle = styled.div.attrs({
         padding-top: 1rem;
         .db-movie-classify{
             h2{
-                padding: 0 1.6rem;
-                height: 2.6rem;
-                line-height: 2.6rem;
+                padding: 0 .16rem;
+                height: .26rem;
+                line-height: .26rem;
                 font-weight: normal;
             }
             ul{
-                margin: 1.6rem 0 0 1.6rem;
+                margin: .16rem 0 0 .16rem;
             }
             li{
                 float: left;
                 width: 50%;
-                padding-right: 1.8rem;
-                height: 4.2rem;
-                line-height: 4.2rem;
-                font-size: 1.6rem;
-                border-top:  0.1rem solid #eee;
-                border-right: 0.1rem solid #eee;
+                padding-right: .18rem;
+                height: .42rem;
+                line-height: .42rem;
+                font-size: .16rem;
+                border-top:  0.01rem solid #eee;
+                border-right: 0.01rem solid #eee;
                 -webkit-box-sizing: border-box;
                 -moz-box-sizing: border-box;
                 box-sizing: border-box;
@@ -40,18 +40,18 @@ const MovieStyle = styled.div.attrs({
                 span{
                     float: right;
                     display: inline-block;
-                    width: 0.8rem;
-                    height: 0.8rem;
-                    margin-top: 1.5rem;
-                    border-right: solid 0.1rem #ccc;
-                    border-bottom: solid 0.1rem #ccc;
+                    width: 0.08rem;
+                    height: 0.08rem;
+                    margin-top: .15rem;
+                    border-right: 0.01rem solid #ccc;
+                    border-bottom: 0.01rem solid #ccc;
                     font-weight: bold;
                     color: #ccc;
                     transform: rotate(-45deg);
                 }
             }
             li:nth-child(2n){
-                padding-left: 1.8rem;
+                padding-left: .18rem;
             }
         }
 `;
