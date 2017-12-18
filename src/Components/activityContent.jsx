@@ -28,7 +28,7 @@ const ActivityStyle = styled.div.attrs({
             display: inline-block;
             margin-left: .1rem;
             margin-top: 0.02rem;
-            padding: 0.05rem 0.6rem;
+            padding: 0.05rem 0.06rem;
             font-size: .14rem;
             color: #333;
             border-radius: .4px;
