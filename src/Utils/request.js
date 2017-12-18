@@ -7,7 +7,6 @@
 
 import request from 'superagent';
 import jsonp from 'superagent-jsonp';
-import UUID from './util';
 
 /**
  * 封装request请求
@@ -19,8 +18,7 @@ const getJsonpRequest = (url, successBack) => {
         request
             .get(url)
             .use(jsonp({
-                timeout: 3000,
-                callbackName: UUID.uuid816
+                timeout: 3000
             }))
             .end((err, res) => {
                 if (!err) {

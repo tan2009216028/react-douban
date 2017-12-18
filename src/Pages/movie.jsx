@@ -173,7 +173,7 @@ export default class MoviePage extends React.Component {
                         {
                             this.state.classifiedViewList.length && this.state.classifiedViewList.map((item, index) => {
                                 return (
-                                    <li key={UUID.uuid810} >
+                                    <li key={UUID.uuid810()} >
                                         <a href={this.state.baseUrl + item.href} >
                                             {item.title}<span></span>
                                         </a>

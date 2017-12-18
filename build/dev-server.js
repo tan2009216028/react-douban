@@ -5,6 +5,7 @@
  * @date: 2017-10-23 17:25
  */
 let express = require('express');
+let request = require('request');
 let port = process.env.PORT || 3001;
 let webpack = require('webpack');
 let webpackDevMiddleware = require('webpack-dev-middleware');
@@ -53,6 +54,11 @@ app.use(hotMiddleware);
 //  使用静态资源
 app.use('/src', express.static('src'));
 app.use('/static', express.static('static'));
+//代理请求服务器图片，接口跨域问题
+app.use('/imgPro[0-9]', function(req, res) {
+    let url = 'https://img'+req.baseUrl.split("/imgPro")[1]+'.doubanio.com' + req.url;
+    request(url).pipe(res);
+});
 app.listen(port, function (err) {
     if (err) {
         throw err;

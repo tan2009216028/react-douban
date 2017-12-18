@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "dev": "node ./build/dev-server.js",
+    "build": "node ./build/build.js"
   },
   "keywords": [
     "react",

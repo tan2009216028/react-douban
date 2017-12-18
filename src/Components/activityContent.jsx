@@ -40,6 +40,8 @@ const ActivityStyle = styled.div.attrs({
         margin-top: .1rem;
         .db-activity-title{
             margin: .1rem 0 .2rem;
+            font-size: 0.16rem;
+            font-weight: bold;
             color: #494949;
             text-align: center;
             text-align-last: left;
@@ -91,6 +93,9 @@ const ActivityStyle = styled.div.attrs({
                 overflow: hidden;
                 font-size: .12rem;
                 color: #111;
+                img{
+                  max-width: 100%;
+                }
             }
         }
     }
@@ -189,7 +194,7 @@ export default class ActivityContentLayout extends React.Component {
         }
         this.store.getActivityDetail(activityId).then(res => {
             this.activityDetail = this.store.actState.detailItem;
-            this.activityThisContent = this.activityDetail.content;
+            this.activityThisContent = this.activityDetail.content.replace(/https:\/\/img(\d).doubanio.com/g, 'imgPro$1');
             this.setState({
                 showType: true
             });

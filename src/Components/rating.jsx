@@ -49,13 +49,13 @@ const Rating = ({ rating }) => {
     let halfStarList = [];
     let grayStarList = [];
     for (let i = 0; i < fullStar; i++) {
-        fullStarList.push(<span key={UUID.uuid810} className="db-full-star"></span>);
+        fullStarList.push(<span key={UUID.uuid810()} className="db-full-star"></span>);
     }
     for (let i = 0; i < halfStar; i++) {
-        halfStarList.push(<span key={UUID.uuid810} className="db-half-star"></span>);
+        halfStarList.push(<span key={UUID.uuid810()} className="db-half-star"></span>);
     }
     for (let i = 0; i < grayStar; i++) {
-        grayStarList.push(<span key={UUID.uuid810} className="db-gray-star"></span>);
+        grayStarList.push(<span key={UUID.uuid810()} className="db-gray-star"></span>);
     }
     return (
         <RatingStyle>

@@ -135,7 +135,7 @@ export default class SectionScroll extends React.Component {
                         {
                             type === 'sectionTags' && sectionList.map((item, index) => {
                                 return (
-                                    <li key={UUID.uuid810} className="db-find-area" style={
+                                    <li key={UUID.uuid1616()} className="db-find-area" style={
                                         {
                                             borderColor: item.color
                                         }
@@ -155,7 +155,7 @@ export default class SectionScroll extends React.Component {
                         {
                             type !== 'sectionTags' && sectionList.length > 0 && sectionList.map((item, index) => {
                                 return (
-                                    <li key={UUID.uuid810}>
+                                    <li key={UUID.uuid1616()}>
                                         <Link to={{
                                             pathname: { pathName },
                                             search: `?file=${item.id}`,

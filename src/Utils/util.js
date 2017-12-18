@@ -1,7 +1,7 @@
 /*
- * @file uuid.js
+ * @file util.js
  * @author:Toshiba
- * @describe: 获取唯一UUID
+ * @describe: 统一工具类方法
  * @date: 2017/12/16 23:42
  */
 
@@ -38,9 +38,18 @@ const getUuid = function(len, radix) {
 };
 
 export default {
-    uuid82: getUuid(8, 2),
-    uuid810: getUuid(8, 10),
-    uuid816: getUuid(8, 16),
+    uuid82: () => {
+        return getUuid(8, 2);
+    },
+    uuid810: () => {
+        return getUuid(8, 10);
+    },
+    uuid816: () => {
+        return getUuid(8, 16);
+    },
+    uuid1616: () => {
+        return getUuid(16, 16);
+    },
     definedUuid: (a, b) => {
         return getUuid(a, b);
     }
