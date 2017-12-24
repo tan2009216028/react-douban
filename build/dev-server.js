@@ -11,6 +11,7 @@ let webpack = require('webpack');
 let webpackDevMiddleware = require('webpack-dev-middleware');
 let webpackHotMiddleware = require('webpack-hot-middleware');
 let webpackConfig = require('./webpack.dev.config');
+let path = require('path');
 let app = express();
 
 //  let devClient = 'webpack-hot-middleware/client?noInfo=true&reload=true';
@@ -59,6 +60,10 @@ app.use('/imgPro[0-9]', function(req, res) {
     let url = 'https://img'+req.baseUrl.split("/imgPro")[1]+'.doubanio.com' + req.url;
     request(url).pipe(res);
 });
+app.get('*', function (request, response){
+    const url = path.resolve(__dirname, '../index.html');
+    response.sendFile(url);
+})
 app.listen(port, function (err) {
     if (err) {
         throw err;

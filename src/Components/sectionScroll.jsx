@@ -58,7 +58,7 @@ const SectionStyle = styled.section.attrs({
                 margin-left: .15rem;
             }
             li:last-child{
-                margin-right: .15rem;
+                padding-right: .15rem;
             }
             .db-movie-title{
                 margin-top: .1rem;
@@ -157,7 +157,7 @@ export default class SectionScroll extends React.Component {
                                 return (
                                     <li key={UUID.uuid1616()}>
                                         <Link to={{
-                                            pathname: { pathName },
+                                            pathname: `/${type}/${pathName}`,
                                             search: `?file=${item.id}`,
                                             query: {
                                                 file: `${item.id}`

@@ -6,8 +6,10 @@
  */
 import ActivityStore from  './activity';
 import MovieStore from  './movie';
+import MovieDetailStore from  './movieDetail';
 
 export default {
     activityStore: new ActivityStore(),
-    movieStore: new MovieStore()
+    movieStore: new MovieStore(),
+    MovieDetailStore: new MovieDetailStore()
 };
