@@ -24,6 +24,9 @@ const BannerStyle = styled.div`
                 font-size: .14rem;
                 color: #2CA532;
             }
+            .db-banner-button{
+              font-size: 0;
+            }
             a{
                 display: inline-block;
                 width: auto;

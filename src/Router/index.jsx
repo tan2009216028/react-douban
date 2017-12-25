@@ -6,7 +6,6 @@ import Home from '../Pages/home';
 import Detail from '../Pages/detail';
 import Movie from '../Pages/movie';
 import MovieDetail from '../Pages/movieDetail';
-
 const ControlCenter = styled.div`
   margin-top: .48rem;
   overflow-x: hidden;
@@ -19,8 +18,8 @@ const Routes = () => (
             <ControlCenter>
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route path="/movie" component={Movie} />
                     <Route path="/movie/movieDescribe" component={MovieDetail} />
+                    <Route path="/movie" component={Movie} />
                     <Route path="/bookPage" component={Home} />
                     <Route path="/broadcastPage" component={Home} />
                     <Route path="/groupPage" component={Home} />

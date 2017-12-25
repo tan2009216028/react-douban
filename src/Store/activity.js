@@ -49,7 +49,6 @@ export default class Activity {
                 this.getMoreData(data);
             } else {
                 getJsonpRequest(myInterface.getActivityList + '?loc=' + myInterface.cityId + '&start=' + this.actState.step + '&count=' + myInterface.count, (res) => {
-                    debugger;
                     console.log('react数据获取完毕');
                     console.log(res.body);
                     setTimeout(() => {

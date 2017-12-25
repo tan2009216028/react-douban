@@ -14,61 +14,67 @@ const FileStyle = styled.div.attrs({
     className: 'db-movie-detail'
 })`
         .db-movie-content{
-            margin: 0 1.8rem;
+            margin: 0 .18rem;
         }
         .db-movie-title{
-            margin: 3rem 0 0.5rem;
-            font-size: 2.4rem;
-            line-height: 3.2rem;
+            margin: .3rem 0 0.05rem;
+            font-size: .24rem;
+            line-height: .32rem;
             word-break: break-all;
             font-weight: normal;
         }
         .db-movie-info{
             display: flex;
             .db-info-left{
-                padding-right: 1rem;
+                padding-right: .1rem;
                 flex: 1;
                 .db-movie-count{
-                    font-size: 1.3rem;
+                    margin: .2rem 0 0 .1rem;
+                    font-size: .13rem;
                     color: #aaa;
-                    vertical-align: bottom;
+                }
+                .db-movie-rate {
+                  font-size: 0;
+                  div{
+                    display: inline-block;
+                  }
                 }
             }
             .db-info-right{
-                width: 10rem;
+                width: 1rem;
                 img{
                     display: block;
                     width: 100%;
                 }
             }
             .db-movie-meta{
-                margin-top: 1.5rem;
-                padding-right: 2.4rem;
+                margin-top: .15rem;
+                padding-right: .24rem;
                 line-height: 1.6;
-                font-size: 1.4rem;
+                font-size: .14rem;
                 color: #494949;
             }
             .db-open-app{
                 display: block;
-                margin-top: 1rem;
-                font-size: 1.4rem;
+                margin-top: .1rem;
+                font-size: .14rem;
                 color: #42bd56;
             }
         }
         .db-movie-idea{
             display: flex;
-            margin: 3rem 0;
+            margin: .3rem 0;
             a{
                 display: block;
                 flex: 1;
-                height: 3rem;
-                margin-right: 1rem;
-                line-height: 3rem;
-                font-size: 1.5rem;
+                height: .3rem;
+                margin-right: .1rem;
+                line-height: .3rem;
+                font-size: .15rem;
                 text-align: center;
                 color: #ffb712;
-                border: 0.1rem solid #ffb712;
-                border-radius: 0.3rem;
+                border: 0.01rem solid #ffb712;
+                border-radius: 0.03rem;
             }
             a:last-child{
                 margin: 0;
@@ -76,14 +82,14 @@ const FileStyle = styled.div.attrs({
         }
         .db-movie-introduce{
             h2{
-                margin-bottom: 1.5rem;
-                font-size: 1.5rem;
+                margin-bottom: .15rem;
+                font-size: .15rem;
                 color: #aaa;
             }
             div{
-                margin-bottom: 1.5rem;
+                margin-bottom: .15rem;
                 line-height: 1.4;
-                font-size: 1.5rem;
+                font-size: .15rem;
                 color: #494949;
                 a{
                     display: inline-block;
@@ -93,8 +99,8 @@ const FileStyle = styled.div.attrs({
         }
         .db-movie-person{
             h2{
-                margin-bottom: 2rem;
-                font-size: 1.5rem;
+                margin-bottom: .2rem;
+                font-size: .15rem;
                 color: #aaa;
             }
             ul{
@@ -103,18 +109,18 @@ const FileStyle = styled.div.attrs({
             }
             li{
                 display: inline-block;
-                width: 7.5rem;
-                margin-right: 0.5rem;
+                width: .75rem;
+                margin-right: 0.05rem;
                 img{
                     display: block;
                     width: 100%;
-                    height: 10.8rem;
+                    height: 1.08rem;
                 }
                 p{
-                    padding: 0.4rem 0;
-                    height: 3.2rem;
-                    line-height: 1.6rem;
-                    font-size: 1.4rem;
+                    padding: 0.04rem 0;
+                    height: .32rem;
+                    line-height: .16rem;
+                    font-size: .14rem;
                     color: #494949;
                     text-align: center;
                     overflow: hidden;
@@ -124,23 +130,23 @@ const FileStyle = styled.div.attrs({
         }
         .db-movie-classify{
             h2{
-                padding: 0 1.6rem;
-                height: 2.6rem;
-                line-height: 2.6rem;
+                padding: 0 .16rem;
+                height: .26rem;
+                line-height: .26rem;
                 font-weight: normal;
             }
             ul{
-                margin: 1.6rem 0 0 1.6rem;
+                margin: .16rem 0 0 .16rem;
             }
             li{
                 float: left;
                 width: 50%;
-                padding-right: 1.8rem;
-                height: 4.2rem;
-                line-height: 4.2rem;
-                font-size: 1.6rem;
-                border-top:  0.1rem solid #eee;
-                border-right: 0.1rem solid #eee;
+                padding-right: .18rem;
+                height: .42rem;
+                line-height: .42rem;
+                font-size: .16rem;
+                border-top:  0.01rem solid #eee;
+                border-right: 0.01rem solid #eee;
                 -webkit-box-sizing: border-box;
                 -moz-box-sizing: border-box;
                 box-sizing: border-box;
@@ -150,18 +156,18 @@ const FileStyle = styled.div.attrs({
                 span{
                     float: right;
                     display: inline-block;
-                    width: 0.8rem;
-                    height: 0.8rem;
-                    margin-top: 1.5rem;
-                    border-right: solid 0.1rem #ccc;
-                    border-bottom: solid 0.1rem #ccc;
+                    width: 0.08rem;
+                    height: 0.08rem;
+                    margin-top: .15rem;
+                    border-right: 0.01rem solid #ccc;
+                    border-bottom: 0.01rem solid #ccc;
                     font-weight: bold;
                     color: #ccc;
                     transform: rotate(-45deg);
                 }
             }
             li:nth-child(2n){
-                padding-left: 1.8rem;
+                padding-left: .18rem;
             }
         }
 `;
@@ -181,7 +187,6 @@ class FileDetail extends React.Component {
         this.movieSummary = this.store.movieDetailData.movieSummary;
     }
     componentDidMount() {
-        debugger;
         let movieId;
         if (this.props.location.query) {
             movieId = this.props.location.query.file;
@@ -200,7 +205,7 @@ class FileDetail extends React.Component {
     render() {
         return (
             <FileStyle>
-                <Banner title={this.state.showType} />
+                <Banner title={this.state.showTitle} />
                 {
                     this.state.showType && (
                         <div className="db-movie-content" >
@@ -208,20 +213,28 @@ class FileDetail extends React.Component {
                             <div className="db-movie-info">
                                 <div className="db-info-left">
                                     {
-                                        this.movieDetailData.rating && <Rating rating={this.movieDetailData.rating} /> && <label className="db-movie-count">{this.movieDetailData.ratings_count}人评价</label>
+                                        this.movieDetailData.rating && (
+                                            <div className="db-movie-rate">
+                                                <Rating rating={this.movieDetailData.rating} defindClass="db-upstep-star" />
+                                                <label className="db-movie-count">{this.movieDetailData.ratings_count}人评价</label>
+                                            </div>
+                                        )
                                     }
                                     {
                                         this.movieDetailData.genres && this.movieMeta && (
-                                            <p className="db-movie-meta">{this.movieMeta}</p>
-                                            // <a className="db-open-app">用App查看影人资料</a>
+                                            <div>
+                                                <p className="db-movie-meta">{this.movieMeta}</p>
+                                                <a className="db-open-app">用App查看影人资料</a>
+                                            </div>
+
                                         )
                                     }
                                 </div>
-                            </div>
-                            <div className="db-info-right">
-                                {
-                                    this.movieDetailData.images && <img src={this.movieDetailData.images.large} alt={this.movieDetailData.title} />
-                                }
+                                <div className="db-info-right">
+                                    {
+                                        this.movieDetailData.images && <img src={this.movieDetailData.images.large} alt={this.movieDetailData.title} />
+                                    }
+                                </div>
                             </div>
                             <div className="db-movie-idea">
                                 <Link to={{
@@ -234,10 +247,7 @@ class FileDetail extends React.Component {
                             <div className="db-movie-introduce">
                                 <h2>{this.movieDetailData.title}的简介</h2>
                                 {
-                                    this.movieSummary && (this.isExpand ? <div>`${this.movieSummary}……`</div> : <div>{this.movieDetailData.summary}</div>)
-                                }
-                                {
-                                    this.isExpand && <a>(展开)</a>
+                                    (this.movieSummary && this.state.isExpand) ? <div>${this.movieSummary}……<a>(展开)</a></div> : <div>{this.movieDetailData.summary}</div>
                                 }
                             </div>
                             {
@@ -250,12 +260,12 @@ class FileDetail extends React.Component {
                                                     this.movieDetailData.casts.map((item, index) => {
                                                         return (
                                                             <li key={UUID.uuid1616()}>
-                                                                <img src={item.avatars.large} alt={item.name} />
+                                                                <img src={'/' + item.avatars.large.replace(/https:\/\/img(\d).doubanio.com/g, 'imgPro$1')} alt={item.name} />
                                                                 <p>{item.name}</p>
                                                             </li>
                                                         );
                                                     })
-                                                })
+                                                }
                                             </ul>
                                         </div>
                                     </div>

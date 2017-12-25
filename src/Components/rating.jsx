@@ -8,8 +8,10 @@ import styled from 'styled-components';
 import UUID from '../Utils/util';
 const RatingStyle = styled.div.attrs({
     className: 'db-movie-rating'
-})` margin-top: 0.05rem;
+})` 
+    margin-top: 0.05rem;
     line-height: .094rem;
+    
     span{
         display: inline-block;
         width: .1rem;
@@ -39,8 +41,31 @@ const RatingStyle = styled.div.attrs({
     .db-movie-zero{
         width: auto;
         height: auto;
-    }`;
-const Rating = ({ rating }) => {
+    }
+    &.db-movie-rating{
+        margin: 0;
+        vertical-align: top;
+        span:not(:last-child){
+            width: .13rem;
+            height: .13rem;
+            font-size: .14rem;
+        }
+        .db-full-star{
+            background-size: .13rem .13rem;
+        }
+        .db-half-star {
+            background-size: .13rem .13rem;
+        }
+        .db-gray-star {
+            background-size: .13rem .13rem;
+        }
+        .db-movie-average{
+        font-size: .14rem;
+        }
+    }
+`;
+const Rating = (props) => {
+    let rating = props.rating;
     let average = rating.average || 0; // 获取电影评分
     let fullStar = parseInt(average / 2, 10) || 0;// 计算满颗星星有多少
     let halfStar = average % 2 === 0 ? 0 : 1; // 计算半颗星星有多少
@@ -58,7 +83,7 @@ const Rating = ({ rating }) => {
         grayStarList.push(<span key={UUID.uuid810()} className="db-gray-star"></span>);
     }
     return (
-        <RatingStyle>
+        <RatingStyle className={props.defindClass ? props.defindClass : ''} >
             {
                 !average && (<span className="db-movie-zero">暂无评分</span>)
             }

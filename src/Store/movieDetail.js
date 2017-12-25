@@ -25,7 +25,6 @@ export default class MovieDetail {
      * id: 电影类目id
      */
     @action getMovieItem(moiveId) {
-        debugger;
         return new Promise((resolve, reject) => {
             changeDataLocalStorage.getLocalStorageData('getMovieSynopsis_' + moiveId, (thisLocalState, data) => {
                 if (thisLocalState) {
@@ -50,18 +49,21 @@ export default class MovieDetail {
      * 获取电影meta简介
      */
     @action movieMeta(content) {
-        return content.movieData.year + ' / ' +
-            content.movieData.genres.join(' / ') + ' / ' +
-            content.movieData.casts.map(item => item.name).join(' / ') + ' / ' +
-            content.movieData.directors.map(item => item.name).join(' / ') + ' / ' +
-            content.movieData.countries.join(' / ');
+        if (content.year) {
+            this.movieDetailData.movieMeta = content.year + ' / ' +
+                content.genres.join(' / ') + ' / ' +
+                content.casts.map(item => item.name).join(' / ') + ' / ' +
+                content.directors.map(item => item.name).join(' / ') + ' / ' +
+                content.countries.join(' / ');
+        }
+
     }
     /**
      * 过滤电影摘要，过多的文字通过点击扩展展开，限定120字符
      */
     @action movieSummary(content) {
-        if (content.movieData.summary) {
-            return content.movieData.summary.slice(0, 120);
+        if (content.summary) {
+            this.movieDetailData.movieSummary = content.summary.slice(0, 120);
         }
     }
 }
