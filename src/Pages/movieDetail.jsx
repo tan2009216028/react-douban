@@ -10,6 +10,9 @@ import { observer, inject } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import Rating from '../Components/rating';
 import UUID from '../Utils/util';
+import MovieScroll from '../Components/sectionScroll';
+import DownLoadApp from '../Components/downLoadApp';
+import Loading from '../Components/loading';
 const FileStyle = styled.div.attrs({
     className: 'db-movie-detail'
 })`
@@ -30,7 +33,7 @@ const FileStyle = styled.div.attrs({
                 flex: 1;
                 .db-movie-count{
                     margin: .2rem 0 0 .1rem;
-                    font-size: .13rem;
+                    font-size: .14rem;
                     color: #aaa;
                 }
                 .db-movie-rate {
@@ -185,6 +188,8 @@ class FileDetail extends React.Component {
         this.movieDetailData = this.store.movieDetailData.content;
         this.movieMeta = this.store.movieDetailData.movieMeta;
         this.movieSummary = this.store.movieDetailData.movieSummary;
+        this.movieTags = this.store.movieDetailData.movieTags;
+        this.introduceExpand = this.introduceExpand.bind(this);
     }
     componentDidMount() {
         let movieId;
@@ -202,10 +207,18 @@ class FileDetail extends React.Component {
             });
         });
     }
+    introduceExpand() {
+        this.setState({
+            isExpand: false
+        });
+    }
     render() {
         return (
             <FileStyle>
                 <Banner title={this.state.showTitle} />
+                {
+                    !this.state.showType && <Loading />
+                }
                 {
                     this.state.showType && (
                         <div className="db-movie-content" >
@@ -247,7 +260,7 @@ class FileDetail extends React.Component {
                             <div className="db-movie-introduce">
                                 <h2>{this.movieDetailData.title}的简介</h2>
                                 {
-                                    (this.movieSummary && this.state.isExpand) ? <div>${this.movieSummary}……<a>(展开)</a></div> : <div>{this.movieDetailData.summary}</div>
+                                    (this.movieSummary && this.state.isExpand) ? <div onClick={this.introduceExpand}>${this.movieSummary}……<a>(展开)</a></div> : <div>{this.movieDetailData.summary}</div>
                                 }
                             </div>
                             {
@@ -274,6 +287,12 @@ class FileDetail extends React.Component {
                         </div>
                     )
                 }
+                <MovieScroll
+                    title="推荐的豆列"
+                    type="sectionTags"
+                    sectionList={this.movieTags}>
+                </MovieScroll>
+                <DownLoadApp />
             </FileStyle>
         );
     }
