@@ -7,9 +7,11 @@
 import ActivityStore from  './activity';
 import MovieStore from  './movie';
 import MovieDetailStore from  './movieDetail';
+import BookStore from  './book';
 
 export default {
     activityStore: new ActivityStore(),
     movieStore: new MovieStore(),
-    MovieDetailStore: new MovieDetailStore()
+    MovieDetailStore: new MovieDetailStore(),
+    bookStore: new BookStore()
 };

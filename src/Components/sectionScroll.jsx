@@ -108,9 +108,11 @@ export default class SectionScroll extends React.Component {
             title,
             type,
             toMoreUrl,
-            sectionList
+            sectionList,
+            children
         } = this.props;
         let pathName = 'movieDescribe';
+        let slotNode = [];
         switch (type) {
             case 'movie':
                 pathName = 'movieDescribe';
@@ -121,6 +123,16 @@ export default class SectionScroll extends React.Component {
             default:
                 pathName = 'movieDescribe';
         }
+        if (children) {
+            if (children.length) {
+                children.forEach(function (child) {
+                    slotNode.push(child);
+                });
+            }
+            else {
+                slotNode.push(children);
+            }
+        }
         return (
             <SectionStyle>
                 <header>
@@ -129,6 +141,9 @@ export default class SectionScroll extends React.Component {
                         type !== 'sectionTags' && <a href={toMoreUrl || ''}>更多</a>
                     }
                 </header>
+                {
+                    children && slotNode
+                }
                 {!sectionList.length && <Loading />}
                 <div className="db-movie-list">
                     <ul className={type === 'sectionTags' ? 'db-find-movie' : ''}>

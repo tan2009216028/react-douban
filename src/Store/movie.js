@@ -1,7 +1,7 @@
 /*
  * @file movie.js
  * @author: Toshiba
- * @describe: 获取电影接口数据
+ * @describe: 电影接口数据
  * @date: 2017/12/11 22:45
  */
 import { action, observable, useStrict } from 'mobx';
