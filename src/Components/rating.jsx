@@ -7,8 +7,8 @@ import React from 'react';
 import styled from 'styled-components';
 import UUID from '../Utils/util';
 const RatingStyle = styled.div.attrs({
-    className: 'db-movie-rating'
-})` 
+    className: props => (props.defindClass ? 'db-movie-rating ' + props.defindClass : 'db-movie-rating')
+})`
     margin-top: 0.05rem;
     line-height: .094rem;
     
@@ -42,7 +42,7 @@ const RatingStyle = styled.div.attrs({
         width: auto;
         height: auto;
     }
-    &.db-movie-rating{
+    &.db-upstep-star{
         margin: 0;
         vertical-align: top;
         span:not(:last-child){
@@ -83,7 +83,7 @@ const Rating = (props) => {
         grayStarList.push(<span key={UUID.uuid810()} className="db-gray-star"></span>);
     }
     return (
-        <RatingStyle className={props.defindClass ? props.defindClass : ''} >
+        <RatingStyle defindClass={props.defindClass ? props.defindClass : ''} >
             {
                 !average && (<span className="db-movie-zero">暂无评分</span>)
             }
