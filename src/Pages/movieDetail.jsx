@@ -174,7 +174,7 @@ const FileStyle = styled.div.attrs({
             }
         }
 `;
-@inject(['MovieDetailStore']) // inject 注入需要的store
+@inject(['movieDetailStore']) // inject 注入需要的store
 @observer // 将 React 组件转化成响应式组件
 class FileDetail extends React.Component {
     constructor(props) {
@@ -184,7 +184,7 @@ class FileDetail extends React.Component {
             showType: false,
             isExpand: true
         };
-        this.store = this.props.MovieDetailStore;
+        this.store = this.props.movieDetailStore;
         this.movieDetailData = this.store.movieDetailData.content;
         this.movieMeta = this.store.movieDetailData.movieMeta;
         this.movieSummary = this.store.movieDetailData.movieSummary;

@@ -8,10 +8,14 @@ import ActivityStore from  './activity';
 import MovieStore from  './movie';
 import MovieDetailStore from  './movieDetail';
 import BookStore from  './book';
+import BookDetailStore from  './bookDetail';
+import BroadcastStore from  './broadcast';
 
 export default {
     activityStore: new ActivityStore(),
     movieStore: new MovieStore(),
-    MovieDetailStore: new MovieDetailStore(),
-    bookStore: new BookStore()
+    movieDetailStore: new MovieDetailStore(),
+    bookStore: new BookStore(),
+    bookDetailStore: new BookDetailStore(),
+    broadcastStore: new BroadcastStore()
 };

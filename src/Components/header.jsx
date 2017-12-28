@@ -71,7 +71,7 @@ export default class Header extends React.Component {
                             <Link to="/book" style={{ color: '#9F7860' }}>图书</Link>
                         </li>
                         <li>
-                            <Link to="/broadcastPage" style={{ color: '#E4A813' }}>广播</Link>
+                            <Link to="/broadcast" style={{ color: '#E4A813' }}>广播</Link>
                         </li>
                         <li>
                             <Link to="/groupPage" style={{ color: '#2AB8CC' }}>小组</Link>

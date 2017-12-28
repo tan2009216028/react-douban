@@ -62,7 +62,7 @@ export default class BookDetail {
                     color: '#42BD56'
                 }
             ]
-        }
+        };
     }
     /**
      * 获取图书详情信息
@@ -92,20 +92,20 @@ export default class BookDetail {
     /**
      * 获取图书meta简介
      */
-    @action movieMeta(content) {
+    @action bookMeta(content) {
         if (content.author) {
             this.bookDetailData.bookMeta = content.author.join(' / ') +
                 content.translator.join(' / ') + ' / ' +
                 content.publisher + ' / ' +
                 content.binding + ' / ' + content.pages + ' / ' +
-                content.price + '/ ' + content.pubdate
+                content.price + '/ ' + content.pubdate;
         }
 
     }
     /**
      * 过滤图书摘要，过多的文字通过点击扩展展开，限定120字符
      */
-    @action movieSummary(content) {
+    @action bookSummary(content) {
         if (content.summary) {
             this.bookDetailData.bookSummary = content.summary.slice(0, 120);
         }
