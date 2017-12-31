@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { observer, inject } from 'mobx-react';
 const HeadBar = styled.div`
         position: fixed;
         top: 0;
@@ -54,8 +54,18 @@ const HeadBar = styled.div`
             }
         }
 `;
-
+@inject(['searchStore']) // inject 注入需要的store
+@observer // 将 React 组件转化成响应式组件
 export default class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.store = this.props.searchStore;
+        this.searchShowDialog = this.searchShowDialog.bind(this);
+    }
+    searchShowDialog() {
+        this.store.changeShowType(true);
+        document.body.style.overflow = 'hidden';
+    }
     render() {
         return (
             <HeadBar>
@@ -74,10 +84,10 @@ export default class Header extends React.Component {
                             <Link to="/broadcast" style={{ color: '#E4A813' }}>广播</Link>
                         </li>
                         <li>
-                            <Link to="/groupPage" style={{ color: '#2AB8CC' }}>小组</Link>
+                            <Link to="/group" style={{ color: '#2AB8CC' }}>小组</Link>
                         </li>
                         <li>
-                            <span className="db-search"></span>
+                            <span className="db-search" onClick={this.searchShowDialog}></span>
                         </li>
                     </ul>
                 </div>

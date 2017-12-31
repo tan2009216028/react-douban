@@ -11,7 +11,7 @@
  */
 const domain = 'https://api.douban.com';
 const lineDomain = 'https://m.douban.com';
-const rapapiDomain = 'http://rapapi.org';
+// const rapapiDomain = 'http://rapapi.org';
 const INTERFACE = {
     cityId: '118318',
     count: 5,
@@ -27,7 +27,8 @@ const INTERFACE = {
     getSearchBookList: domain + '/v2/book/search', // 查询指定内容的图书
     getSearchMusicList: domain + '/v2/music/search', // 查询指定内容的音乐
     getBroadcastList: lineDomain + '/rexxar/api/v2/status/anonymous_timeline', // 获取非登录用户广播
-    getRapapiList: rapapiDomain + '/mockjsdata/24739/group'  // 模拟豆瓣小组接口
+    getGroupList: lineDomain + '/rexxar/api/v2/group/rec_groups_for_newbies' // 获取小组接口
+    // getRapapiList: rapapiDomain + '/mockjsdata/24739/group'  // 模拟豆瓣小组接口
 };
 /*
  * 本地存储

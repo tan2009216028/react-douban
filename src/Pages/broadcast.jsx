@@ -96,6 +96,7 @@ export default class BroadcastPage extends React.Component {
                         broadcastData: this.store.broadcastData
                     });
                 });
+                console.log('加载完成1');
             });
         } else {
             this.store.getBroadcastList(maxId).then(res => {

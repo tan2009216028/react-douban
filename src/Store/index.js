@@ -10,6 +10,8 @@ import MovieDetailStore from  './movieDetail';
 import BookStore from  './book';
 import BookDetailStore from  './bookDetail';
 import BroadcastStore from  './broadcast';
+import GroupStore from  './group';
+import SearchStore from  './search';
 
 export default {
     activityStore: new ActivityStore(),
@@ -17,5 +19,7 @@ export default {
     movieDetailStore: new MovieDetailStore(),
     bookStore: new BookStore(),
     bookDetailStore: new BookDetailStore(),
-    broadcastStore: new BroadcastStore()
+    broadcastStore: new BroadcastStore(),
+    groupStore: new GroupStore(),
+    searchStore: new SearchStore(),
 };

@@ -9,6 +9,7 @@ import MovieDetail from '../Pages/movieDetail';
 import Book from '../Pages/book';
 import BookDetail from '../Pages/bookDetail';
 import Broadcast from '../Pages/broadcast';
+import Group from '../Pages/group';
 const ControlCenter = styled.div`
   margin-top: .48rem;
   overflow-x: hidden;
@@ -26,7 +27,7 @@ const Routes = () => (
                     <Route path="/book/bookDescribe" component={BookDetail} />
                     <Route path="/book" component={Book} />
                     <Route path="/broadcast" component={Broadcast} />
-                    <Route path="/groupPage" component={Home} />
+                    <Route path="/group" component={Group} />
                     {/* <Route path="/detailPage?activityId=:activityId" component={Detail} 通过match中的params.activityId无法做到浏览器后退和前进 /> */}
                     <Route path="/detailPage" component={Detail} />
                 </Switch>
