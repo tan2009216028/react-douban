@@ -7,7 +7,12 @@ import React from 'react';
 import styled from 'styled-components';
 import UUID from '../Utils/util';
 const RatingStyle = styled.div.attrs({
-    className: props => (props.defindClass ? 'db-movie-rating ' + props.defindClass : 'db-movie-rating')
+    // className: props => (props.defindClass ? 'db-movie-rating ' + props.defindClass : 'db-movie-rating')
+    //  Arrow function used ambiguously with a conditional expression  no-confusing-arrow
+    //  箭头函数的箭头和比较操作符 (>, <, <=, and >=)很相似，该规则要求在和比较操作符容易发生混淆时禁止使用箭头函数语法
+    className: function(props) {
+        return props.defindClass ? 'db-movie-rating ' + props.defindClass : 'db-movie-rating';
+    }
 })`
     margin-top: 0.05rem;
     line-height: .094rem;

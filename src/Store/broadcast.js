@@ -14,22 +14,32 @@ useStrict(true);
 export default class Broadcast {
     @observable broadcastData;
     constructor() {
-        this.broadcastData = {};
+        this.broadcastData = {
+            items: []
+        };
     }
     /**
      * 获取非登录用户广播20条
      * 新增异步触发new Promise((resolve, reject) => {})
      */
-    @action getBroadcastList() {
+    @action getBroadcastList(maxId = '') {
         return new Promise((resolve, reject) => {
-            changeDataLocalStorage.getLocalStorageData('broadcastData', (thisLocalState, data) => {
+            changeDataLocalStorage.getLocalStorageData('broadcastData_' + maxId, (thisLocalState, data) => {
                 if (thisLocalState) {
-                    this.broadcastData = data;
+                    if (maxId === '') {
+                        this.broadcastData.items = data.items;
+                    } else {
+                        this.broadcastData.items = this.broadcastData.items.concat(data.items);
+                    }
                     resolve(data);
                 } else {
-                    getJsonpRequest(myInterface.getBroadcastList, (res) => {
-                        this.broadcastData = res.body;
-                        changeDataLocalStorage.setLocalStorageData('broadcastData', res.body);
+                    getJsonpRequest(myInterface.getBroadcastList + '?max_id=' + maxId, (res) => {
+                        if (maxId === '') {
+                            this.broadcastData.items = res.body.items;
+                        } else {
+                            this.broadcastData.items = this.broadcastData.items.concat(res.body.items);
+                        }
+                        changeDataLocalStorage.setLocalStorageData('broadcastData_' + maxId, res.body);
                         resolve(res.body);
                     });
                 }

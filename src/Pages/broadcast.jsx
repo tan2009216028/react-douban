@@ -9,19 +9,20 @@ import styled from 'styled-components';
 import Banner from '../Components/banner';
 import { observer, inject } from 'mobx-react';
 import DownLoadApp from '../Components/downLoadApp';
+import UserAiring from '../Components/userAiring';
 import Loading from '../Components/loading';
 
 const BroadcastStyle = styled.div.attrs({
     className: 'db-airing-content'
 })`
-.db-airing-user{
+        .db-airing-user{
             position: relative;
             display: flex;
             padding: .1rem .18rem  0.09rem;
             height: .4rem;
             font-size: 0;
             overflow: hidden;
-            border-bottom: 0.1rem solid #E8E8E8;
+            border-bottom: 0.01rem solid #E8E8E8;
             .db-airing-head{
                 flex: 1;
                 img{
@@ -58,6 +59,15 @@ const BroadcastStyle = styled.div.attrs({
                 }
             }
         }
+        .db-list-link{
+            display: block;
+            padding: .15rem 0;
+            font-size: .16rem;
+            line-height: .18rem;
+            text-align: center;
+            cursor: pointer;
+            color: #42bd56;
+        }
 `;
 @inject(['broadcastStore']) // inject 注入需要的store
 @observer // 将 React 组件转化成响应式组件
@@ -67,17 +77,34 @@ export default class BroadcastPage extends React.Component {
         this.state = {
             showTitle: '打开App，回复广播',
             showType: false,
+            broadcastData: []
         };
         this.store = this.props.broadcastStore;
-        this.broadcastData = this.store.broadcastData;
     }
     componentDidMount() {
-        this.store.getBroadcastList().then(res => {
-            this.broadcastData = this.store.broadcastData;
+        this.getMoreBroadcast();
+    }
+    getMoreBroadcast(type, event) {
+        let maxId = this.store.broadcastData['items'].length ? this.store.broadcastData.items[this.store.broadcastData.items.length - 1].status.id : '';
+        if (type) {
             this.setState({
-                showType: true
+                showType: false
+            }, () => {
+                this.store.getBroadcastList(maxId).then(res => {
+                    this.setState({
+                        showType: true,
+                        broadcastData: this.store.broadcastData
+                    });
+                });
             });
-        });
+        } else {
+            this.store.getBroadcastList(maxId).then(res => {
+                this.setState({
+                    showType: true,
+                    broadcastData: this.store.broadcastData
+                });
+            });
+        }
     }
     render() {
         return (
@@ -93,9 +120,11 @@ export default class BroadcastPage extends React.Component {
                         <span className="db-airing-camera" ></span>
                     </div>
                 </div>
+                <UserAiring broadcastData={this.store.broadcastData} />
                 {
-                    !this.state.showTitle && <Loading />
+                    !this.state.showType && <Loading />
                 }
+                <a className="db-list-link" onClick={this.getMoreBroadcast.bind(this, 'click')}>显示更多广播</a>
                 <DownLoadApp />
             </BroadcastStyle>
         );

@@ -188,16 +188,21 @@ export default class BookPage extends React.Component {
                     type="book"
                     sectionList={this.store.state.travel}
                     toMoreUrl="https://market.douban.com/book/" >
-                    <div className="db-book-sell" >
-                        <img className="corver" src={this.state.bookImgUrl} alt="bookName" />
-                        <div className="db-book-info" >
-                            <div className="db-book-title" >
-                                <p className="db-book-name" >{this.state.bookName}</p>
-                                <span className="db-book-price" >¥ {this.state.bookPrice}</span>
+                    {
+                        this.store.state.travel.length > 0 && (
+                            <div className="db-book-sell" >
+                                <img className="corver" src={this.state.bookImgUrl} alt="bookName" />
+                                <div className="db-book-info" >
+                                    <div className="db-book-title" >
+                                        <p className="db-book-name" >{this.state.bookName}</p>
+                                        <span className="db-book-price" >¥ {this.state.bookPrice}</span>
+                                    </div>
+                                    <p className="db-book-describe" >{this.state.bookDes}</p>
+                                </div>
                             </div>
-                            <p className="db-book-describe" >{this.state.bookDes}</p>
-                        </div>
-                    </div>
+                        )
+                    }
+
                 </BookScroll>
                 <BookScroll
                     title="发现好书"

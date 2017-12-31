@@ -206,7 +206,6 @@ export default class BookDetail extends React.Component {
         this.introduceExpand = this.introduceExpand.bind(this);
     }
     componentDidMount() {
-        debugger;
         let bookId;
         if (this.props.location.query) {
             bookId = this.props.location.query.file;
@@ -214,7 +213,6 @@ export default class BookDetail extends React.Component {
             bookId = this.props.location.search.split('?')[1].split('=')[1];
         }
         this.store.getBookItem(bookId).then(res => {
-            debugger;
             this.bookDetailData = this.store.bookDetailData.content;
             this.bookMeta = this.store.bookDetailData.bookMeta;
             this.bookSummary = this.store.bookDetailData.bookSummary;
