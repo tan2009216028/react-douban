@@ -12,6 +12,7 @@ import Broadcast from '../Pages/broadcast';
 import Group from '../Pages/group';
 import { observer, inject } from 'mobx-react';
 import Search from '../Components/search';
+import SearchDetail from '../Pages/searchDetail';
 const ControlCenter = styled.div`
   margin-top: .48rem;
   overflow-x: hidden;
@@ -36,6 +37,7 @@ export default class Routes extends React.Component {
                             <Route path="/book" component={Book} />
                             <Route path="/broadcast" component={Broadcast} />
                             <Route path="/group" component={Group} />
+                            <Route path="/search" component={SearchDetail} />
                             {/* <Route path='/detailPage?activityId=:activityId' component={Detail} 通过match中的params.activityId无法做到浏览器后退和前进 /> */}
                             <Route path="/detailPage" component={Detail} />
                         </Switch>

@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 const SearchStyle = styled.div.attrs({
     className: 'db-search-panel'
 })`
@@ -111,21 +111,45 @@ const SearchStyle = styled.div.attrs({
         }
 `;
 
-export default class Search extends React.Component {
-    // 在组件接收到新的props或者state但还没有render时被调用。在初始化时不会被调用。
-    componentWillUpdate() {
-        this.closeSearchDialog();
+class Search extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            searchWord: ''
+        };
+        this.closeSearchDialog = this.closeSearchDialog.bind(this);
+        this.handelChange = this.handelChange.bind(this);
+        this.goSearch = this.goSearch.bind(this);
+    }
+    // 当props发生变化时执行
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location !== this.props.location) {
+            this.closeSearchDialog();
+        }
     }
     closeSearchDialog() {
         this.props.getCloseSearchDialog();
+    }
+    goSearch(event) {
+        debugger;
+        event.preventDefault(); // 阻止表单默认提交
+        this.props.history.push({
+            pathname: '/search',
+            search: `?name=${this.state.searchWord}`
+        });
+    }
+    handelChange(event) {
+        this.setState({
+            searchWord: event.target.value
+        });
     }
     render() {
         return (
             <SearchStyle>
                 <div className="db-header-bar">
-                    <span className="db-close-talion" onClick={this.closeSearchDialog.bind(this)}>关闭</span>
-                    <form className="db-search-layout">
-                        <input type="search" name="query" />
+                    <span className="db-close-talion" onClick={this.closeSearchDialog}>关闭</span>
+                    <form className="db-search-layout" onSubmit={this.goSearch}>
+                        <input type="search" onChange={this.handelChange} value={this.state.searchWord} />
                     </form>
                 </div>
                 <ul className="db-plate-list">
@@ -210,3 +234,4 @@ export default class Search extends React.Component {
         );
     }
 }
+export default withRouter(Search);
