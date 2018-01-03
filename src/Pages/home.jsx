@@ -2,27 +2,20 @@ import React from 'react';
 import SubNav from '../Components/subNav';
 import { observer, inject } from 'mobx-react';
 import HomeList from '../Components/homeList';
-import Search from '../Components/search';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroller';
 const HomeControllerStyle = styled.div`
 position: relative;
 `;
 @inject(['activityStore']) // inject 注入需要的store
-@inject(['searchStore']) // inject 注入需要的store
 @observer // 将 React 组件转化成响应式组件
 export default class HomeController extends React.Component {
     constructor(props) {
         super(props);
         this.activityStore = this.props.activityStore;  // 通过props来导入访问已注入的store
-        this.searchStore = this.props.searchStore;  // 通过props来导入访问已注入的searchStore
     }
     getLoadMore() {
         this.activityStore.getActivityList();
-    }
-    getCloseSearchDialog() {
-        this.searchStore.changeShowType(false);
-        document.body.style.overflow = 'auto';
     }
     render() {
         const { match } = this.props;
@@ -41,9 +34,6 @@ export default class HomeController extends React.Component {
                     } >
                     <HomeList getListArr={this.activityStore.actState.list} />
                 </InfiniteScroll>
-                {
-                    this.searchStore.searchData.showType && <Search getCloseSearchDialog={this.getCloseSearchDialog.bind(this)} />
-                }
             </HomeControllerStyle>
         );
     }

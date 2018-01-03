@@ -112,6 +112,10 @@ const SearchStyle = styled.div.attrs({
 `;
 
 export default class Search extends React.Component {
+    // 在组件接收到新的props或者state但还没有render时被调用。在初始化时不会被调用。
+    componentWillUpdate() {
+        this.closeSearchDialog();
+    }
     closeSearchDialog() {
         this.props.getCloseSearchDialog();
     }
@@ -139,10 +143,10 @@ export default class Search extends React.Component {
                                 <strong style={{ color: 'rgb(159, 120, 96)' }}>阅读</strong>
                                 <span>电子书</span>
                             </a>
-                            <a href="#">
-                                <strong style={{ color: 'rgb(225, 100, 77)' }}>东西</strong>
-                                <span>心爱之物</span>
-                            </a>
+                            <Link to="/broadcast" >
+                                <strong style={{ color: 'rgb(225, 100, 77)' }}>广播</strong>
+                                <span>友邻动态</span>
+                            </Link>
                         </div>
                     </li>
                     <li>
@@ -167,10 +171,10 @@ export default class Search extends React.Component {
                     </li>
                     <li>
                         <div>
-                            <a href="#">
+                            <Link to="/book" >
                                 <strong style={{ color: 'rgb(159, 120, 96)' }}>图书</strong>
                                 <span>畅销排行</span>
-                            </a>
+                            </Link>
                             <a href="#">
                                 <strong style={{ color: 'rgb(244, 143, 46)' }}>音乐</strong>
                                 <span>新碟榜</span>

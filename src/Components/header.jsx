@@ -64,7 +64,6 @@ export default class Header extends React.Component {
     }
     searchShowDialog() {
         this.store.changeShowType(true);
-        document.body.style.overflow = 'hidden';
     }
     render() {
         return (

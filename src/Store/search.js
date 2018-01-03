@@ -19,5 +19,11 @@ export default class Search {
     }
     @action changeShowType(type) {
         this.searchData.showType = type;
+        if (type) {
+            document.body.style.overflow = 'hidden';
+        }
+        else {
+            document.body.style.overflow = 'auto';
+        }
     }
 }
