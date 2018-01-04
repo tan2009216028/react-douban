@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { contentImgUrlReplace } from '../Utils/util';
 const HomeListStyle = styled.div`
         li{
             padding: .25rem .18rem .25rem 0;
@@ -77,7 +78,7 @@ const HomeList = ({ getListArr }) => (
                                         <h3>{item.title}</h3>
                                         <p>{item.content}</p>
                                     </div>
-                                    <div className="db-feed-img" ><p style={{ backgroundImage: 'url(' + item.image_hlarge + ')' }} ></p></div>
+                                    <div className="db-feed-img" ><p style={{ backgroundImage: 'url(' + contentImgUrlReplace(item.image_hlarge) + ')' }} ></p></div>
                                 </div>
                                 <div className="author">by&nbsp;<span className="name">{item.owner.name}</span><span className="db-feed-label right">主题 {item.category_name}</span></div>
                             </Link >

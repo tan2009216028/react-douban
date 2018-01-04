@@ -9,7 +9,7 @@ import Banner from '../Components/banner';
 import { observer, inject } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import Rating from '../Components/rating';
-import UUID from '../Utils/util';
+import UUID, { contentImgUrlReplace } from '../Utils/util';
 import MovieScroll from '../Components/sectionScroll';
 import DownLoadApp from '../Components/downLoadApp';
 import Loading from '../Components/loading';
@@ -245,7 +245,7 @@ class FileDetail extends React.Component {
                                 </div>
                                 <div className="db-info-right">
                                     {
-                                        this.movieDetailData.images && <img src={this.movieDetailData.images.large} alt={this.movieDetailData.title} />
+                                        this.movieDetailData.images && <img src={contentImgUrlReplace(this.movieDetailData.images.large)} alt={this.movieDetailData.title} />
                                     }
                                 </div>
                             </div>
@@ -273,7 +273,7 @@ class FileDetail extends React.Component {
                                                     this.movieDetailData.casts.map((item, index) => {
                                                         return (
                                                             <li key={UUID.uuid1616()}>
-                                                                <img src={'/' + item.avatars.large.replace(/https:\/\/img(\d).doubanio.com/g, 'imgPro$1')} alt={item.name} />
+                                                                <img src={contentImgUrlReplace(item.avatars.large)} alt={item.name} />
                                                                 <p>{item.name}</p>
                                                             </li>
                                                         );

@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import styled from 'styled-components';
-import UUID from '../Utils/util';
+import UUID, { contentImgUrlReplace } from '../Utils/util';
 
 const GroupListStyle = styled.div.attrs({
     className: 'db-group-classify'
@@ -83,7 +83,7 @@ export default (props) => {
                                         return (
                                             <li key={UUID.uuid1616()}>
                                                 <div className="db-group-meta">
-                                                    <img src={item1.avatar} alt={item1.name} />
+                                                    <img src={contentImgUrlReplace(item1.avatar)} alt={item1.name} />
                                                     <div className="db-group-info" >
                                                         {item1.name}
                                                     </div>

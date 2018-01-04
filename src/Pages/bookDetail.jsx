@@ -10,7 +10,7 @@ import Banner from '../Components/banner';
 import { observer, inject } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import Rating from '../Components/rating';
-import UUID from '../Utils/util';
+import UUID, { contentImgUrlReplace } from '../Utils/util';
 import BookScroll from '../Components/sectionScroll';
 import DownLoadApp from '../Components/downLoadApp';
 import Loading from '../Components/loading';
@@ -255,7 +255,7 @@ export default class BookDetail extends React.Component {
                                 </div>
                                 <div className="db-info-right" >
                                     {
-                                        this.bookDetailData.images && <img src={this.bookDetailData.images.large} alt={this.bookDetailData.title} />
+                                        this.bookDetailData.images && <img src={contentImgUrlReplace(this.bookDetailData.images.large)} alt={this.bookDetailData.title} />
                                     }
                                 </div>
                             </div>

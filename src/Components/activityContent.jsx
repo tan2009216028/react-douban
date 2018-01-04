@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
 import DownLoadApp from '../Components/downLoadApp';
 import Loading from '../Components/loading';
+import { contentImgUrlReplace } from '../Utils/util';
 const ActivityStyle = styled.div.attrs({
     className: 'db-activity-layout'
 })`
@@ -117,7 +118,7 @@ class ActivityContent extends React.Component {
             <div className="db-activity-content">
                 <h1 className="db-activity-title">{this.activityDetail.title}</h1>
                 <div className="db-activity-img">
-                    <img src={this.activityDetail.image_hlarge} />
+                    <img src={contentImgUrlReplace(this.activityDetail.image_hlarge)} />
                 </div>
                 <div className="flexible-box db-activity-detail">
                     <span className="db-detail-title">时间:&nbsp;&nbsp;</span>
@@ -194,7 +195,7 @@ export default class ActivityContentLayout extends React.Component {
         }
         this.store.getActivityDetail(activityId).then(res => {
             this.activityDetail = this.store.actState.detailItem;
-            this.activityThisContent = this.activityDetail.content.replace(/https:\/\/img(\d).doubanio.com/g, 'imgPro$1');
+            this.activityThisContent = contentImgUrlReplace(this.activityDetail.content);
             this.setState({
                 showType: true
             });

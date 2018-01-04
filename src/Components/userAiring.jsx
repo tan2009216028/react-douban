@@ -5,7 +5,7 @@
  */
 import React from 'react';
 import styled from 'styled-components';
-import UUID from '../Utils/util';
+import UUID, { contentImgUrlReplace } from '../Utils/util';
 const AiringStyle = styled.div.attrs({
     className: 'db-status-list'
 })`
@@ -165,9 +165,6 @@ export default class UserAiring extends React.Component {
             __html: thisText
         };
     }
-    imgUrlReplace(imgObj) {
-        return imgObj.large.url.replace(/https:\/\/img(\d).doubanio.com/g, 'imgPro$1');
-    }
     render() {
         return (
             <AiringStyle>
@@ -195,7 +192,7 @@ export default class UserAiring extends React.Component {
                                                                 className={item.status.card.image ? 'db-article-content db-img-article' : 'db-article-content'}>
                                                                 <p className="db-article-ellipsis">{item.status.card.subtitle}</p>
                                                                 {
-                                                                    item.status.card.image && <img src={this.imgUrlReplace(item.status.card.image)} />
+                                                                    item.status.card.image && <img src={contentImgUrlReplace(item.status.card.image.large.url)} />
                                                                 }
                                                             </div>
                                                         </div>
@@ -208,7 +205,7 @@ export default class UserAiring extends React.Component {
                                                     item.status.reshared_status && <div className="db-article-text" dangerouslySetInnerHTML={this.sayHTML(item.status.reshared_status.text)}></div>
                                                 }
                                                 {
-                                                    item.status.images.length > 0 && <img src={this.imgUrlReplace(item.status.images[0])} />
+                                                    item.status.images.length > 0 && <img src={contentImgUrlReplace(item.status.images[0].large.url)} />
                                                 }
                                             </div>
                                             <div className="db-status-thumbs">

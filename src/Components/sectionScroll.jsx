@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import Loading from '../Components/loading';
 import Rating from '../Components/rating';
 import { Link } from 'react-router-dom';
-import UUID from '../Utils/util';
+import UUID, { contentImgUrlReplace } from '../Utils/util';
 const SectionStyle = styled.section.attrs({
     className: 'db-movie-item'
 })`
@@ -178,7 +178,7 @@ export default class SectionScroll extends React.Component {
                                                 file: `${item.id}`
                                             }
                                         }}>
-                                            <img src={item.images.large} alt={item.title} />
+                                            <img src={contentImgUrlReplace(item.images.large)} alt={item.title} />
                                             <p className="db-movie-title">{item.title}</p>
                                             {
                                                 item.rating && <Rating rating={item.rating} />

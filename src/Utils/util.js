@@ -15,7 +15,7 @@
  * getUuid(8, 16) // "098F4D35"
  *
  */
-const getUuid = function(len, radix) {
+const getUuid = (len, radix) => {
     let chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
     let uuid = [];
     let thisRadix = radix;
@@ -36,7 +36,14 @@ const getUuid = function(len, radix) {
     }
     return uuid.join('');
 };
-
+/**
+ *  图片地址替换
+ * @param content
+ * @returns {string | void | *}
+ */
+export const contentImgUrlReplace = (content) => {
+    return content.replace(/https:\/\/img(\d).doubanio.com/g, '/imgPro$1');
+};
 export default {
     uuid82: () => {
         return getUuid(8, 2);
