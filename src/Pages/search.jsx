@@ -7,6 +7,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link, withRouter } from 'react-router-dom';
+import { observer, inject } from 'mobx-react';
 const SearchStyle = styled.div.attrs({
     className: 'db-search-panel'
 })`
@@ -111,15 +112,18 @@ const SearchStyle = styled.div.attrs({
         }
 `;
 
+@inject(['searchStore']) // inject 注入需要的store
+@observer // 将 React 组件转化成响应式组件
 class Search extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             searchWord: ''
         };
         this.closeSearchDialog = this.closeSearchDialog.bind(this);
         this.handelChange = this.handelChange.bind(this);
         this.goSearch = this.goSearch.bind(this);
+        this.store = this.props.searchStore;
     }
     // 当props发生变化时执行
     componentWillReceiveProps(nextProps) {
@@ -135,8 +139,12 @@ class Search extends React.Component {
         event.preventDefault(); // 阻止表单默认提交
         this.props.history.push({
             pathname: '/search',
-            search: `?name=${this.state.searchWord}`
+            search: `?name=${this.state.searchWord}`,
+            query: {
+                name: `${this.state.searchWord}`
+            }
         });
+        this.store.getSearchList(this.state.searchWord);
     }
     handelChange(event) {
         this.setState({

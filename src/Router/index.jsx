@@ -11,7 +11,7 @@ import BookDetail from '../Pages/bookDetail';
 import Broadcast from '../Pages/broadcast';
 import Group from '../Pages/group';
 import { observer, inject } from 'mobx-react';
-import Search from '../Components/search';
+import Search from '../Pages/search';
 import SearchDetail from '../Pages/searchDetail';
 const ControlCenter = styled.div`
   margin-top: .48rem;
