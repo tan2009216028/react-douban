@@ -273,7 +273,9 @@ class FileDetail extends React.Component {
                                                     this.movieDetailData.casts.map((item, index) => {
                                                         return (
                                                             <li key={UUID.uuid1616()}>
-                                                                <img src={contentImgUrlReplace(item.avatars.large)} alt={item.name} />
+                                                                {
+                                                                    item.avatars && <img src={contentImgUrlReplace(item.avatars.large)} alt={item.name} />
+                                                                }
                                                                 <p>{item.name}</p>
                                                             </li>
                                                         );

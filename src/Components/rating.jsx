@@ -16,7 +16,6 @@ const RatingStyle = styled.div.attrs({
 })`
     margin-top: 0.05rem;
     line-height: .094rem;
-    
     span{
         display: inline-block;
         width: .1rem;
@@ -46,6 +45,7 @@ const RatingStyle = styled.div.attrs({
     .db-movie-zero{
         width: auto;
         height: auto;
+        line-height: .14rem;
     }
     &.db-upstep-star{
         margin: 0;

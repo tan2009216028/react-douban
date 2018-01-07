@@ -7,6 +7,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Rating from '../Components/rating';
+import { Link } from 'react-router-dom';
 import UUID, { contentImgUrlReplace } from '../Utils/util';
 
 const SearchListStyle = styled.div.attrs({
@@ -14,6 +15,12 @@ const SearchListStyle = styled.div.attrs({
 })`
         padding-top: .14rem;
         margin-left: .18rem;
+        .db-item-header {
+              h2 {
+                  font-size: .15rem;
+                  line-height: .15rem;
+              }
+        }
         .db-item-content {
             position: relative;
             li {
@@ -63,18 +70,23 @@ export default (props) => {
             </div>
             <ul className="db-item-content">
                 {
-                    items.length > 0 && items.map((item,index)=>{
+                    items.data.length > 0 && items.data.map((item, index) => {
                         return (
                             <li key={UUID.uuid1616()} >
                                 <Link to={{
-                                    pathname: item.pageType,
+                                    pathname: items.pageType,
                                     search: `?file=${item.id}`,
                                     query: {
                                         file: `${item.id}`
                                     }
                                 }} >
                                     <div className="db-item-meta">
-                                        <img src={contentImgUrlReplace(item.images.small)} alt={item.title} />
+                                        {
+                                            item.images && <img src={contentImgUrlReplace(item.images.small)} alt={item.title} />
+                                        }
+                                        {
+                                            item.image && <img src={contentImgUrlReplace(item.image)} alt={item.title} />
+                                        }
                                         <div className="db-item-info" >
                                             <span>{item.title}</span>
                                             {
@@ -84,7 +96,7 @@ export default (props) => {
                                     </div>
                                 </Link >
                             </li>
-                        )
+                        );
                     })
                 }
             </ul>
@@ -92,5 +104,5 @@ export default (props) => {
                 children && slotNode
             }
         </SearchListStyle>
-    )
-}
+    );
+};

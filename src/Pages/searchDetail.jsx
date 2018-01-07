@@ -7,6 +7,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
+import SearchList from '../Components/searchList';
+import Loading from '../Components/loading';
 const SearchStyle = styled.div.attrs({
     className: 'search-view'
 })`
@@ -57,6 +59,9 @@ const SearchStyle = styled.div.attrs({
 export default class SearchDetail extends React.Component {
     constructor(props) {
         super(props);
+        this.fileSearch = this.fileSearch.bind(this);
+        this.handelChange = this.handelChange.bind(this);
+        this.store = this.props.searchStore;
         let fileSearchName = '';
         if (this.props.location) {
             if (this.props.location.query) {
@@ -68,17 +73,25 @@ export default class SearchDetail extends React.Component {
         this.state = {
             searchWord: fileSearchName
         };
-        this.fileSearch = this.fileSearch.bind(this);
-        this.handelChange = this.handelChange.bind(this);
-        this.store = this.props.searchStore;
-        debugger;
+    }
+    componentDidMount() {
+        this.store.getSearchList(this.state.searchWord);
+    }
+    // 当props发生变化时执行
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.location !== this.props.location) {
+            this.setState({
+                searchWord: nextProps.location.query.name
+            });
+            this.store.getSearchList(nextProps.location.query.name);
+        }
     }
     fileSearch(event) {
-        debugger;
+        this.store.resetData().then(res => {
+            this.store.getSearchList(this.state.searchWord);
+        });
     }
     handelChange(event) {
-        console.log(event.target);
-        debugger;
         this.setState({
             searchWord: event.target.value
         });
@@ -92,6 +105,24 @@ export default class SearchDetail extends React.Component {
                         <a onClick={this.fileSearch}>搜索</a>
                     </form>
                 </div>
+                {
+                    !this.store.searchData.loadData && <Loading />
+                }
+                {
+                    this.store.searchData.loadData && (
+                        <div className="search-res">
+                            <SearchList title="影视" items={this.store.searchData.queryMovieData}>
+                                <a className="list-link" href={this.store.searchData.queryMovieData.movieUrl + this.state.searchWord} >查看更多影视结果</a>
+                            </SearchList>
+                            <SearchList title="图书" items={this.store.searchData.queryBookData}>
+                                <a className="list-link" href={this.store.searchData.queryBookData.bookUrl + this.state.searchWord} >查看更多影视结果</a>
+                            </SearchList>
+                            <SearchList title="音乐" items={this.store.searchData.queryMusicData}>
+                                <a className="list-link" href={this.store.searchData.queryBookData.musicUrl + this.state.searchWord} >查看更多影视结果</a>
+                            </SearchList>
+                        </div>
+                    )
+                }
             </SearchStyle>
         );
     }

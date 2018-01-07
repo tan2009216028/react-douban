@@ -12,15 +12,19 @@ useStrict(true);
 
 export default class Search {
     @observable searchData;
+
     constructor() {
         this.searchData = {
             showType: false,
+            loadData: false,
             queryMovieData: {},
             queryBookData: {},
             queryMusicData: {}
         };
     }
-    @action changeShowType(type) {
+
+    @action
+    changeShowType(type) {
         this.searchData.showType = type;
         if (type) {
             document.body.style.overflow = 'hidden';
@@ -29,77 +33,96 @@ export default class Search {
             document.body.style.overflow = 'auto';
         }
     }
-    @action changeSearchState(type, data) {
+    @action resetData() {
+        return new Promise((resolve, reject) => {
+            this.searchData = Object.assign(this.searchData, {
+                loadData: false,
+                queryMovieData: {},
+                queryBookData: {},
+                queryMusicData: {}
+            });
+            resolve(this.searchData);
+        });
+    }
+    @action
+    changeSearchState(type, data) {
         switch (type) {
             case 'movie':
-                this.state.queryMovieData = {
+                this.searchData.queryMovieData = {
                     pageType: '/movie/movieDescribe',
-                    data: data.subjects
+                    movieUrl: 'https://m.douban.com/search?type=movie&query=',
+                    data: data['subjects'] || []
                 };
                 break;
             case 'book':
-                this.state.queryBookData = {
+                this.searchData.queryBookData = {
                     pageType: '/book/bookDescribe',
-                    data: data.books
+                    bookUrl: 'https://m.douban.com/search?type=book&query=',
+                    data: data['books'] || []
                 };
                 break;
             case 'music':
-                this.state.queryMusicData = {
-                    pageType: '/movie/movieDescribe',
-                    data: data.musics
+                this.searchData.queryMusicData = {
+                    pageType: '',
+                    musicUrl: 'https://m.douban.com/search?type=music&query=',
+                    data: data['musics'] || []
                 };
                 break;
         }
     }
+
     /**
      * 查询电影,图书，音乐，默认返回5条数据
+     * @param queryStr
      */
     @action
     getSearchList(queryStr) {
         let getSearchMovieList = new Promise((resolve, reject) => {
-            changeDataLocalStorage.getLocalStorageData('getSearchMovieList', (thisLocalState, data) => {
+            changeDataLocalStorage.getLocalStorageData('getSearchMovieList' + queryStr, (thisLocalState, data) => {
                 if (thisLocalState) {
                     this.changeSearchState('movie', data);
                     resolve(data);
                 } else {
                     getJsonpRequest(myInterface.getSearchMovieList + '?q=' + queryStr + '&count=5', (res) => {
                         this.changeSearchState('movie', res.body);
-                        changeDataLocalStorage.setLocalStorageData('getSearchMovieList', res.body);
+                        changeDataLocalStorage.setLocalStorageData('getSearchMovieList' + queryStr, res.body);
                         resolve(res.body);
                     });
                 }
             });
         });
         let getSearchBookList = new Promise((resolve, reject) => {
-            changeDataLocalStorage.getLocalStorageData('getSearchBookList', (thisLocalState, data) => {
+            changeDataLocalStorage.getLocalStorageData('getSearchBookList' + queryStr, (thisLocalState, data) => {
                 if (thisLocalState) {
                     this.changeSearchState('book', data);
                     resolve(data);
                 } else {
                     getJsonpRequest(myInterface.getSearchBookList + '?q=' + queryStr + '&count=5', (res) => {
                         this.changeSearchState('book', res.body);
-                        changeDataLocalStorage.setLocalStorageData('getSearchBookList', res.body);
+                        changeDataLocalStorage.setLocalStorageData('getSearchBookList' + queryStr, res.body);
                         resolve(res.body);
                     });
                 }
             });
         });
         let getSearchMusicList = new Promise((resolve, reject) => {
-            changeDataLocalStorage.getLocalStorageData('getSearchMusicList', (thisLocalState, data) => {
+            changeDataLocalStorage.getLocalStorageData('getSearchMusicList' + queryStr, (thisLocalState, data) => {
                 if (thisLocalState) {
                     this.changeSearchState('music', data);
                     resolve(data);
                 } else {
                     getJsonpRequest(myInterface.getSearchMusicList + '?q=' + queryStr + '&count=5', (res) => {
                         this.changeSearchState('music', res.body);
-                        changeDataLocalStorage.setLocalStorageData('getSearchMusicList', res.body);
+                        changeDataLocalStorage.setLocalStorageData('getSearchMusicList' + queryStr, res.body);
                         resolve(res.body);
                     });
                 }
             });
         });
-        Promise.all([getSearchMovieList, getSearchBookList, getSearchMusicList]).then((result) => {
-            this.changeShowType('showType', true);
-        });
+        Promise.all([getSearchMovieList, getSearchBookList, getSearchMusicList]).then(action(
+            result => {
+                this.searchData.loadData = true;
+            }
+        ));
     }
 }

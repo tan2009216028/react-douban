@@ -10,6 +10,8 @@ import Book from '../Pages/book';
 import BookDetail from '../Pages/bookDetail';
 import Broadcast from '../Pages/broadcast';
 import Group from '../Pages/group';
+import Register from '../Pages/register';
+import Login from '../Pages/login';
 import { observer, inject } from 'mobx-react';
 import Search from '../Pages/search';
 import SearchDetail from '../Pages/searchDetail';
@@ -38,6 +40,8 @@ export default class Routes extends React.Component {
                             <Route path="/broadcast" component={Broadcast} />
                             <Route path="/group" component={Group} />
                             <Route path="/search" component={SearchDetail} />
+                            <Route path="/register" component={Register} />
+                            <Route path="/login" component={Login} />
                             {/* <Route path='/detailPage?activityId=:activityId' component={Detail} 通过match中的params.activityId无法做到浏览器后退和前进 /> */}
                             <Route path="/detailPage" component={Detail} />
                         </Switch>
