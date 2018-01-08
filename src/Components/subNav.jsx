@@ -33,16 +33,16 @@ const SubNavObj = (props) => {
             <div className="db-no-login" >
                 <ul className="ul-li-float clearFix">
                     <li>
-                        <Link to={`${props.match.url}/movie`} > 影院热映</Link>
+                        <Link to="/movie" > 影院热映</Link>
                     </li>
                     <li><a>欧美新碟榜</a></li>
                     <li>
-                        <Link to={`${props.match.url}/register`} >
+                        <Link to="/register" >
                             注册帐号
                         </Link>
                     </li>
                     <li>
-                        <Link to={`${props.match.url}/login`} >
+                        <Link to="/login" >
                             登录豆瓣
                         </Link>
                     </li>
