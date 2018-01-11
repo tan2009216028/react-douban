@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react';
 import HomeList from '../Components/homeList';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroller';
+import Message from '../Components/message';
 const HomeControllerStyle = styled.div`
 position: relative;
 `;
@@ -13,6 +14,12 @@ export default class HomeController extends React.Component {
     constructor(props) {
         super(props);
         this.activityStore = this.props.activityStore;  // 通过props来导入访问已注入的store
+    }
+    componentDidMount() {
+        Message.show({
+            msg: '你好'
+        });
+        console.log('初始哈');
     }
     getLoadMore() {
         this.activityStore.getActivityList();
