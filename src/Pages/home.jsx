@@ -16,6 +16,7 @@ export default class HomeController extends React.Component {
         this.activityStore = this.props.activityStore;  // 通过props来导入访问已注入的store
     }
     componentDidMount() {
+        debugger;
         Message.show({
             msg: '你好'
         });
