@@ -15,13 +15,6 @@ export default class HomeController extends React.Component {
         super(props);
         this.activityStore = this.props.activityStore;  // 通过props来导入访问已注入的store
     }
-    componentDidMount() {
-        debugger;
-        Message.show({
-            msg: '你好'
-        });
-        console.log('初始哈');
-    }
     getLoadMore() {
         this.activityStore.getActivityList();
     }
@@ -42,6 +35,7 @@ export default class HomeController extends React.Component {
                     } >
                     <HomeList getListArr={this.activityStore.actState.list} />
                 </InfiniteScroll>
+                <Message msg="本项目仅仅作为学习交流使用，无任何商业用途！" />
             </HomeControllerStyle>
         );
     }
