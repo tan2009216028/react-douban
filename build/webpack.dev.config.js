@@ -101,8 +101,9 @@ let configure = {
         new webpack.HotModuleReplacementPlugin(),
         new FriendlyErrorsPlugin(),
         new HtmlWebpackPlugin({
+            favicon:'./static/favicon.ico',
             title: 'React App',
-            filename: 'index.html',
+            filename: 'react/index.html',
             template: 'index.html',
             inject: true
         })

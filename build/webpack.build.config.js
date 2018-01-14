@@ -1,91 +1,101 @@
 /*
  * @file webpack.config.js
  * @author: cdtanhongzhao
- * @describe: 静态资源初始化配置
+ * @describe: 静态资源生产环境打包
  * @date: 2017-10-23 17:42
  */
-var webpack = require('webpack');
-var path = require('path');
-var glob = require('glob');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
-var artTemplateList = glob.sync(path.resolve(__dirname, '../src/**/index.art'));
-var moduleEntryIndex = glob.sync(path.resolve(__dirname, '../src/**/index.js'));
-let  getEntry = {};
-moduleEntryIndex.forEach(function(item) {
-    getEntry[item.match(/src\/(\S*).js/)[1]] = item;
-});
-console.log(getEntry)
-var configure = {
-    entry: getEntry,
-    output: {
-        path: path.resolve(__dirname, "../dist"),
-        filename: "[name].js"
+let webpack = require('webpack');
+let path = require('path');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+let configure = {
+    entry: {
+        base: ['react', 'react-dom', 'react-router-dom', 'styled-components', 'superagent' ,'superagent-jsonp'],
+        appIndex: './src/appIndex.js',
     },
-    externals: {
-        "Zepto": "window.Zepto",
-        "template": "window.template",
-        "jquery": "window.jQuery"
+    output: {
+        path: path.resolve(__dirname, '../dist'),
+        publicPath: './',
+        filename: '[name].js'
     },
     resolve: {
-        extensions: ['.js', '.json', '.tpl']
+        extensions: ['.js', '.json', '.jsx','.less','jsonp', '.scss', '.css']
     },
     module: {
         rules: [
-            // {
-            //     test: /\.(js|vue)$/,
-            //     loader: 'eslint-loader',
-            //     enforce: 'pre',
-            //     include: [resolve('src'), resolve('test')],
-            //     options: {
-            //         formatter: require('eslint-friendly-formatter')
-            //     }
-            // },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use:ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    //resolve-url-loader may be chained before sass-loader if necessary
+                    use: [
+                        { loader: 'css-loader' },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true,
+                                config: {
+                                    path: './postcss.config.js'
+                                }
+                            }
+                        }
+                    ]
+                })
             },
             {
-                test: /\.less$/,
-                use: [
-                    {
-                        loader: "style-loader"
-                    },
-                    {
-                        loader: "css-loader"
-                    },
-                    {
-                        loader: "less-loader"
+                test: /\.(jpg|png|gif|svg)$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000
                     }
-                ]
+                }
             },
-            // {
-            //     test: /\.js$/,
-            //     loader: 'babel-loader',
-            //     include: [
-            //         resolve('src'), resolve('test')
-            //     ]
-            // },
             {
-                test: /.art$/,
-                use: ['art-template-loader']
+                enforce: 'pre',
+                test: /(\.jsx|\.js)$/,
+                exclude: /node_modules/,
+                include: /src/,
+                loader: 'eslint-loader',
+            },
+            {
+                test: /(\.jsx|\.js)$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
+            {
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                use: {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10000,
+                        // fonts/打包到dist下的fonts文件夹
+                        name: 'fonts/[name].[hash:7].[ext]'
+                    }
+                }
             }
         ]
     },
     plugins: [
-        new webpack.NoEmitOnErrorsPlugin(),//跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误。
-        new webpack.HotModuleReplacementPlugin(),
-        new FriendlyErrorsPlugin()
+        new ExtractTextPlugin('app.css'),
+        new webpack.optimize.UglifyJsPlugin({
+            compress: {
+                warnings: false
+            },
+            sourceMap: true
+        }),
+        new webpack.NoEmitOnErrorsPlugin(), // 跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误。
+        new FriendlyErrorsPlugin(),
+        // new HtmlWebpackPlugin({
+        //     favicon:'./static/favicon.ico',
+        //     title: '豆瓣reactApp',
+        //     filename: 'index.html',
+        //     template: './index.html',
+        //     inject: 'head'
+        // })
     ]
-}
-// artTemplateList.forEach(function(item) {
-//     var fileName = "." + item.match(/\S*(\/m\/\S*).art/)[1] + ".html";
-//     console.log(fileName)
-//     configure.plugins.push(new HtmlWebpackPlugin({
-//         template: item,
-//         filename: fileName,
-//         chunks: ['index','index2'],
-//         inject: true
-//     }))
-// });
+};
 module.exports = configure;

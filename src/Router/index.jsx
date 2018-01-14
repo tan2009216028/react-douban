@@ -27,7 +27,7 @@ export default class Routes extends React.Component {
     }
     render() {
         return (
-            <Router>
+            <Router basename="/react">
                 <div className="react-douban">
                     <HeaderBar appTitle="react测试" title="我不好" />
                     <ControlCenter>

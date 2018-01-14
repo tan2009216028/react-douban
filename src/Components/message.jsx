@@ -70,7 +70,7 @@ export default class Message extends React.Component {
                 this.setState({
                     isShow: false
                 });
-            }, 2000);
+            }, 3000);
         }
     }
     componentWillUnmount() {
