@@ -66,13 +66,20 @@ export default class Message extends React.Component {
     componentDidMount() {
         if (this.state.isShow) {
             document.body.appendChild(this.container);
-            setTimeout(() => {
+            // 异步回调可能存在组件已经更换的时候，那么需要在组件移除的时候清除该回调方法
+            this.timer = setTimeout(() => {
                 this.setState({
                     isShow: false
                 }, () => {
                     document.body.removeChild(this.container);
                 });
             }, 3000);
+        }
+    }
+    componentWillUnmount() {
+        if (this.container) {
+            clearTimeout(this.timer);
+            document.body.removeChild(this.container);
         }
     }
     render() {
