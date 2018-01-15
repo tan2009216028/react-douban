@@ -30,7 +30,12 @@ let configure = {
                     fallback: 'style-loader',
                     //resolve-url-loader may be chained before sass-loader if necessary
                     use: [
-                        { loader: 'css-loader' },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                minimize: true //css压缩
+                            }
+                        },
                         {
                             loader: 'postcss-loader',
                             options: {
@@ -88,14 +93,7 @@ let configure = {
             sourceMap: true
         }),
         new webpack.NoEmitOnErrorsPlugin(), // 跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误。
-        new FriendlyErrorsPlugin(),
-        // new HtmlWebpackPlugin({
-        //     favicon:'./static/favicon.ico',
-        //     title: '豆瓣reactApp',
-        //     filename: 'index.html',
-        //     template: './index.html',
-        //     inject: 'head'
-        // })
+        new FriendlyErrorsPlugin()
     ]
 };
 module.exports = configure;

@@ -69,13 +69,11 @@ export default class Message extends React.Component {
             setTimeout(() => {
                 this.setState({
                     isShow: false
+                }, () => {
+                    document.body.removeChild(this.container);
                 });
             }, 3000);
         }
-    }
-    componentWillUnmount() {
-        ReactDOM.unmountComponentAtNode(this.container);
-        document.body.removeChild(this.container);
     }
     render() {
         if (this.state.isShow) {
