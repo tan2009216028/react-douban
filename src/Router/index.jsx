@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import HeaderBar from '../Components/header';
 import Home from '../Pages/home';
@@ -32,7 +32,7 @@ export default class Routes extends React.Component {
                     <HeaderBar appTitle="react测试" title="我不好" />
                     <ControlCenter>
                         <Switch>
-                            <Route exact path="/" component={Home} />
+                            <Route exact path="/index.html" component={Home} />
                             <Route path="/movie/movieDescribe" component={MovieDetail} />
                             <Route path="/movie" component={Movie} />
                             <Route path="/book/bookDescribe" component={BookDetail} />
@@ -42,8 +42,8 @@ export default class Routes extends React.Component {
                             <Route path="/search" component={SearchDetail} />
                             <Route path="/register" component={Register} />
                             <Route path="/login" component={Login} />
-                            {/* <Route path='/detailPage?activityId=:activityId' component={Detail} 通过match中的params.activityId无法做到浏览器后退和前进 /> */}
                             <Route path="/detailPage" component={Detail} />
+                            <Redirect to="/index.html" />
                         </Switch>
                     </ControlCenter>
                     {

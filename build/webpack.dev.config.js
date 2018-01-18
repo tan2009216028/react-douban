@@ -99,14 +99,14 @@ let configure = {
     plugins: [
         new webpack.NoEmitOnErrorsPlugin(), // 跳过编译时出错的代码并记录，使编译后运行时的包不会发生错误。
         new webpack.HotModuleReplacementPlugin(),
-        new FriendlyErrorsPlugin(),
-        new HtmlWebpackPlugin({
-            favicon:'./static/favicon.ico',
-            title: 'React App',
-            filename: 'react/index.html',
-            template: 'index.html',
-            inject: true
-        })
+        new FriendlyErrorsPlugin()
+        // new HtmlWebpackPlugin({
+        //     favicon:'./static/favicon.ico',
+        //     title: 'React App',
+        //     filename: 'react/index.html',
+        //     template: 'index.html',
+        //     inject: true
+        // })
     ]
 };
 module.exports = configure;

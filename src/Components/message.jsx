@@ -72,6 +72,7 @@ export default class Message extends React.Component {
                     isShow: false
                 }, () => {
                     document.body.removeChild(this.container);
+                    this.container = null;
                 });
             }, 3000);
         }
