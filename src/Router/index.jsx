@@ -27,12 +27,12 @@ export default class Routes extends React.Component {
     }
     render() {
         return (
-            <Router basename="/react">
+            <Router basename="/">
                 <div className="react-douban">
                     <HeaderBar appTitle="react测试" title="我不好" />
                     <ControlCenter>
                         <Switch>
-                            <Route exact path="/index.html" component={Home} />
+                            <Route exact path="/" component={Home} />
                             <Route path="/movie/movieDescribe" component={MovieDetail} />
                             <Route path="/movie" component={Movie} />
                             <Route path="/book/bookDescribe" component={BookDetail} />
@@ -43,7 +43,7 @@ export default class Routes extends React.Component {
                             <Route path="/register" component={Register} />
                             <Route path="/login" component={Login} />
                             <Route path="/detailPage" component={Detail} />
-                            <Redirect to="/index.html" />
+                            <Redirect to="/" />
                         </Switch>
                     </ControlCenter>
                     {
