@@ -6,8 +6,20 @@
  */
 import ActivityStore from  './activity';
 import MovieStore from  './movie';
+import MovieDetailStore from  './movieDetail';
+import BookStore from  './book';
+import BookDetailStore from  './bookDetail';
+import BroadcastStore from  './broadcast';
+import GroupStore from  './group';
+import SearchStore from  './search';
 
 export default {
     activityStore: new ActivityStore(),
-    movieStore: new MovieStore()
+    movieStore: new MovieStore(),
+    movieDetailStore: new MovieDetailStore(),
+    bookStore: new BookStore(),
+    bookDetailStore: new BookDetailStore(),
+    broadcastStore: new BroadcastStore(),
+    groupStore: new GroupStore(),
+    searchStore: new SearchStore(),
 };

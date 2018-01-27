@@ -7,29 +7,32 @@ import React from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
 import DownLoadApp from '../Components/downLoadApp';
+import MovieScroll from '../Components/sectionScroll';
+import UUID from '../Utils/util';
 const MovieStyle = styled.div.attrs({
     className: 'db-movie-content'
 })`
-        padding-top: 1rem;
+        padding-top: .1rem;
         .db-movie-classify{
             h2{
-                padding: 0 1.6rem;
-                height: 2.6rem;
-                line-height: 2.6rem;
+                padding: 0 .16rem;
+                height: .26rem;
+                line-height: .26rem;
+                font-size: .168rem;
                 font-weight: normal;
             }
             ul{
-                margin: 1.6rem 0 0 1.6rem;
+                margin: .16rem 0 0 .16rem;
             }
             li{
                 float: left;
                 width: 50%;
-                padding-right: 1.8rem;
-                height: 4.2rem;
-                line-height: 4.2rem;
-                font-size: 1.6rem;
-                border-top:  0.1rem solid #eee;
-                border-right: 0.1rem solid #eee;
+                padding-right: .18rem;
+                height: .42rem;
+                line-height: .42rem;
+                font-size: .16rem;
+                border-top:  0.01rem solid #eee;
+                border-right: 0.01rem solid #eee;
                 -webkit-box-sizing: border-box;
                 -moz-box-sizing: border-box;
                 box-sizing: border-box;
@@ -39,18 +42,18 @@ const MovieStyle = styled.div.attrs({
                 span{
                     float: right;
                     display: inline-block;
-                    width: 0.8rem;
-                    height: 0.8rem;
-                    margin-top: 1.5rem;
-                    border-right: solid 0.1rem #ccc;
-                    border-bottom: solid 0.1rem #ccc;
+                    width: 0.08rem;
+                    height: 0.08rem;
+                    margin-top: .15rem;
+                    border-right: 0.01rem solid #ccc;
+                    border-bottom: 0.01rem solid #ccc;
                     font-weight: bold;
                     color: #ccc;
                     transform: rotate(-45deg);
                 }
             }
             li:nth-child(2n){
-                padding-left: 1.8rem;
+                padding-left: .18rem;
             }
         }
 `;
@@ -61,7 +64,6 @@ export default class MoviePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showType: true,
             baseUrl: 'https://m.douban.com/',
             classifiedViewList: [
                 {
@@ -142,13 +144,36 @@ export default class MoviePage extends React.Component {
     render() {
         return (
             <MovieStyle>
+                <MovieScroll
+                    title="影院热映"
+                    type="movie"
+                    sectionList={this.store.state.hotMovies}
+                    toMoreUrl={`${this.state.baseUrl}movie/nowintheater?loc_id=118318`} >
+                </MovieScroll>
+                <MovieScroll
+                    title="免费在线观影"
+                    type="movie"
+                    sectionList={this.store.state.topMovies}
+                    toMoreUrl={`${this.state.baseUrl}movie/watchonline`} >
+                </MovieScroll>
+                <MovieScroll
+                    title="新片速递"
+                    type="movie"
+                    sectionList={this.store.state.newMovies}
+                    toMoreUrl={`${this.state.baseUrl}movie/latest`} >
+                </MovieScroll>
+                <MovieScroll
+                    title="发现好电影"
+                    type="sectionTags"
+                    sectionList={this.store.state.movieTags}>
+                </MovieScroll>
                 <div className="db-movie-classify">
                     <h2>分类浏览</h2>
                     <ul className="clearFix">
                         {
                             this.state.classifiedViewList.length && this.state.classifiedViewList.map((item, index) => {
                                 return (
-                                    <li key={index} >
+                                    <li key={UUID.uuid810()} >
                                         <a href={this.state.baseUrl + item.href} >
                                             {item.title}<span></span>
                                         </a>

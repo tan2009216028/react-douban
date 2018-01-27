@@ -6,55 +6,64 @@
 import React from 'react';
 import styled from 'styled-components';
 import Loading from '../Components/loading';
+import Rating from '../Components/rating';
+import { Link } from 'react-router-dom';
+import UUID, { contentImgUrlReplace } from '../Utils/util';
 const SectionStyle = styled.section.attrs({
     className: 'db-movie-item'
 })`
-        padding-top: 1rem;
+        padding-top: .1rem;
         header{
-            padding: 0 1.6rem;
-            height: 2.4rem;
-            line-height: 2.4rem;
+            display: flex;
+            padding: 0 .16rem;
+            height: .24rem;
+            line-height: .24rem;
             h2{
-                display: inline-block;
-                min-width: 4em;
-                font-size: 1.68rem;
+                flex: 1;
+                min-width: .4em;
+                font-size: .168rem;
                 font-weight: normal;
                 color: #111;
             }
             a{
-                float: right;
-                font-size: 1.44rem;
+                display: block;
+                font-size: .144rem;
                 color: #42bd56;
             }
         }
         .db-movie-list{
             ul{
-                padding: 0.8rem 0;
+                padding: 0.08rem 0;
+                max-height: 2.16rem;
+                overflow-y: hidden;
                 overflow-x: auto;
                 white-space: nowrap;
+                &.db-find-movie{
+                line-height: 0.52rem;
+                }
             }
             li{
                 display: inline-block;
-                width: 10rem;
-                margin-left: 1rem;
+                width: 1rem;
+                margin-left: .1rem;
                 vertical-align: middle;
                 text-align: center;
                 img{
                     display: block;
-                    width: 10rem;
-                    height: 15rem;
+                    width: 1rem;
+                    height: 1.5rem;
                 }
             }
             li:first-child{
-                margin-left: 1.5rem;
+                margin-left: .15rem;
             }
             li:last-child{
-                margin-right: 1.5rem;
+                padding-right: .15rem;
             }
             .db-movie-title{
-                margin-top: 1rem;
-                line-height: 1.6rem;
-                font-size: 1.6rem;
+                margin-top: .1rem;
+                line-height: .16rem;
+                font-size: .16rem;
                 color: #111;
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -62,55 +71,127 @@ const SectionStyle = styled.section.attrs({
             }
             .db-find-area:empty{
                 display: block;
-                height: 0.1rem;
-                border: 0;
                 margin: 0;
+                height: 0.01rem;
+                line-height: 0.01rem;
+                border: 0;
             }
             .db-find-area{
                 display: inline-block;
                 width: auto;
-                margin: 0 0 0.8rem 1.6rem;
-                font-size: 1.6rem;
-                border: solid 0.1rem;
-                border-radius: 0.4rem;
+                margin: 0 0 0.08rem .16rem;
+                font-size: .16rem;
+                border: solid 0.01rem;
+                border-radius: 0.04rem;
                 vertical-align: middle;
                 a{
                     display: block;
-                    height: 50px;
-                    line-height: 50px;
-                    padding: 0 1.55rem;
-                    letter-spacing: .1em;
+                    height: 0.5rem;
+                    line-height: 0.5rem;
+                    padding: 0 .155rem;
+                    letter-spacing: .01em;
                     text-align: center;
                 }
             }
         }
         .db-no-content{
-            line-height: 5rem;
-            font-size: 1.44rem;
+            line-height: .5rem;
+            font-size: .144rem;
             color: #42bd56;
             text-align: center;
         }
 `;
 
 export default class SectionScroll extends React.Component {
-    state = {
-        showType:false
-    };
-    constructor(props) {
-        super(props);
-
-    }
     render() {
-        return(
+        const {
+            title,
+            type,
+            toMoreUrl,
+            sectionList,
+            children
+        } = this.props;
+        let pathName = 'movieDescribe';
+        let slotNode = [];
+        switch (type) {
+            case 'movie':
+                pathName = 'movieDescribe';
+                break;
+            case 'book':
+                pathName = 'bookDescribe';
+                break;
+            default:
+                pathName = 'movieDescribe';
+        }
+        if (children) {
+            if (children.length) {
+                children.forEach(function (child) {
+                    slotNode.push(child);
+                });
+            }
+            else {
+                slotNode.push(children);
+            }
+        }
+        return (
             <SectionStyle>
                 <header>
-                    <h2>{this.props.title}</h2>
+                    <h2>{title}</h2>
                     {
-                        this.props.type != 'sectionTags' && <a href={this.props.type.toMoreUrl || ''}>更多</a>
+                        type !== 'sectionTags' && <a href={toMoreUrl || ''}>更多</a>
                     }
                 </header>
-                {!this.state.showType && <Loading />}
+                {
+                    children && slotNode
+                }
+                {!sectionList.length && <Loading />}
+                <div className="db-movie-list">
+                    <ul className={type === 'sectionTags' ? 'db-find-movie' : ''}>
+                        {
+                            type === 'sectionTags' && sectionList.map((item, index) => {
+                                return (
+                                    <li key={UUID.uuid1616()} className="db-find-area" style={
+                                        {
+                                            borderColor: item.color
+                                        }
+                                    }>
+                                        {
+                                            !item.line && <a href={item.href} style={
+                                                {
+                                                    color: item.color
+                                                }
+                                            } >{item.title}</a>
+                                        }
+
+                                    </li>
+                                );
+                            })
+                        }
+                        {
+                            type !== 'sectionTags' && sectionList.length > 0 && sectionList.map((item, index) => {
+                                return (
+                                    <li key={UUID.uuid1616()}>
+                                        <Link to={{
+                                            pathname: `/${type}/${pathName}`,
+                                            search: `?file=${item.id}`,
+                                            query: {
+                                                file: `${item.id}`
+                                            }
+                                        }}>
+                                            <img src={contentImgUrlReplace(item.images.large)} alt={item.title} />
+                                            <p className="db-movie-title">{item.title}</p>
+                                            {
+                                                item.rating && <Rating rating={item.rating} />
+                                            }
+                                        </Link>
+                                    </li>
+
+                                );
+                            })
+                        }
+                    </ul>
+                </div>
             </SectionStyle>
-        )
+        );
     }
 }

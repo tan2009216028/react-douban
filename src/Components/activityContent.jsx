@@ -8,79 +8,82 @@ import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
 import DownLoadApp from '../Components/downLoadApp';
 import Loading from '../Components/loading';
+import { contentImgUrlReplace } from '../Utils/util';
 const ActivityStyle = styled.div.attrs({
     className: 'db-activity-layout'
 })`
     .db-activity-city{
         display: flex;
-        padding: 1rem;
-        height: 5rem;
+        padding: .1rem;
+        height: .5rem;
         overflow: hidden;
         background: #f6f5f2;
         align-items: center;
         a{
             font-family: "Microsoft YaHei UI";
             font-weight: bolder;
-            font-size: 2.4rem;
+            font-size: .24rem;
             color: #E85206;
         }
         span{
             display: inline-block;
-            margin-left: 1rem;
-            margin-top: 0.2rem;
-            padding: 0.5rem 0.6rem;
-            font-size: 1.4rem;
+            margin-left: .1rem;
+            margin-top: 0.02rem;
+            padding: 0.05rem 0.06rem;
+            font-size: .14rem;
             color: #333;
-            border-radius: 4px;
+            border-radius: .4px;
             background-color: #dedede;
         }
     }
     .db-activity-content{
-        padding: 1rem;
-        margin-top: 1rem;
+        padding: .1rem;
+        margin-top: .1rem;
         .db-activity-title{
-            margin: 1rem 0 2rem;
+            margin: .1rem 0 .2rem;
+            font-size: 0.16rem;
+            font-weight: bold;
             color: #494949;
             text-align: center;
             text-align-last: left;
         }
         .db-activity-img{
-            margin-bottom: 2rem;
+            margin-bottom: .2rem;
             text-align: center;
             img{
                 width: 100%;
-                max-width: 22rem;
+                max-width: 2.2rem;
                 height: auto;
             }
         }
         .db-activity-detail{
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.05rem;
             .db-detail-title{
                 line-height: 1.5;
-                font-size: 1.2rem;
+                font-size: .12rem;
                 color: #666666;
             }
             .db-detail-adaptive{
-                padding-left: 0.2rem;
+                padding-left: 0.02rem;
                 line-height: 1.5;
-                font-size: 1.2rem;
+                font-size: .12rem;
                 color: #111;
             }
         }
         .db-activity-interest{
-            padding: 0.5rem 0;
-            font-size: 1.2rem;
+            padding: 0.05rem 0;
+            font-size: .12rem;
             color: #666666;
             span{
-                font-size: 1.2rem;
+                font-size: .12rem;
                 font-weight: bolder;
             }
         }
         .db-activity-stage{
-            margin: 1rem 0 2rem;
+            margin: .1rem 0 .2rem;
             h3{
-                margin-bottom: 0.8rem;
-                font-size: 1.2rem;
+                margin-bottom: 0.08rem;
+                font-size: .12rem;
                 font-weight: normal;
                 color: #072;
             }
@@ -89,8 +92,11 @@ const ActivityStyle = styled.div.attrs({
                 line-height: 1.5;
                 word-wrap: break-word;
                 overflow: hidden;
-                font-size: 1.2rem;
+                font-size: .12rem;
                 color: #111;
+                img{
+                  max-width: 100%;
+                }
             }
         }
     }
@@ -112,7 +118,7 @@ class ActivityContent extends React.Component {
             <div className="db-activity-content">
                 <h1 className="db-activity-title">{this.activityDetail.title}</h1>
                 <div className="db-activity-img">
-                    <img src={this.activityDetail.image_hlarge} />
+                    <img src={contentImgUrlReplace(this.activityDetail.image_hlarge)} />
                 </div>
                 <div className="flexible-box db-activity-detail">
                     <span className="db-detail-title">时间:&nbsp;&nbsp;</span>
@@ -189,7 +195,7 @@ export default class ActivityContentLayout extends React.Component {
         }
         this.store.getActivityDetail(activityId).then(res => {
             this.activityDetail = this.store.actState.detailItem;
-            this.activityThisContent = this.activityDetail.content;
+            this.activityThisContent = contentImgUrlReplace(this.activityDetail.content);
             this.setState({
                 showType: true
             });
