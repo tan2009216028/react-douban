@@ -17,6 +17,10 @@ app.use('/imgPro[0-9]', function(req, res) {
     let url = 'https://img'+req.baseUrl.split("/imgPro")[1]+'.doubanio.com' + req.url;
     request(url).pipe(res);
 });
+app.get('/', function(req, res){
+    const url = path.resolve(__dirname, '../reactIndex.html');
+    res.sendFile(url);
+});
 // app.get('*', function (request, response){
 //     const url = path.resolve(__dirname, '../reactIndex.html');
 //     response.sendFile(url);
