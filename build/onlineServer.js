@@ -10,7 +10,7 @@ let port = process.env.PORT || 3002;
 let path = require('path');
 let app = express();
 //  使用静态资源
-app.use('/static', express.static(__dirname, '../static'));
+app.use('/static', express.static(path.resolve(__dirname, '../static')));
 app.use('/react', express.static(path.resolve(__dirname, '../react')));
 //代理请求服务器图片，接口跨域问题
 app.use('/imgPro[0-9]', function(req, res) {
