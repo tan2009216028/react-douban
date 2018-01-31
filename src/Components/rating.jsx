@@ -40,7 +40,7 @@ const RatingStyle = styled.div.attrs({
         padding: 0.02rem 0.02rem 0 0.08rem;
         width: auto;
         height: auto;
-        font-size: 0.072rem;
+        font-size: 0.1rem;
     }
     .db-movie-zero{
         width: auto;
