@@ -6,6 +6,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Loading from '../Components/loading';
+import LazyLoad from 'react-lazyload';
 import Rating from '../Components/rating';
 import { Link } from 'react-router-dom';
 import UUID, { contentImgUrlReplace } from '../Utils/util';
@@ -178,7 +179,9 @@ export default class SectionScroll extends React.Component {
                                                 file: `${item.id}`
                                             }
                                         }}>
-                                            <img src={contentImgUrlReplace(item.images.large)} alt={item.title} />
+                                            <LazyLoad height={150} once>
+                                                <img src={contentImgUrlReplace(item.images.large)} alt={item.title} />
+                                            </LazyLoad>
                                             <p className="db-movie-title">{item.title}</p>
                                             {
                                                 item.rating && <Rating rating={item.rating} />

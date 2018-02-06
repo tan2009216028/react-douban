@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { contentImgUrlReplace } from '../Utils/util';
+import UUID, { contentImgUrlReplace } from '../Utils/util';
 const HomeListStyle = styled.div`
         li{
             padding: .25rem .18rem .25rem 0;
@@ -65,7 +65,7 @@ const HomeList = ({ getListArr }) => (
             {
                 getListArr.length > 0 && getListArr.map((item, index) => {
                     return (
-                        <li key={index} >
+                        <li key={UUID.uuid1616()} >
                             <Link to={{
                                 pathname: '/detailPage',
                                 search: `?activityId=${item.id}`,
