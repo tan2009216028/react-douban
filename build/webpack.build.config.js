@@ -88,7 +88,9 @@ let configure = {
         new ExtractTextPlugin('app.css'),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
-                warnings: false
+                warnings: false,
+                drop_debugger: true,
+                drop_console: true
             },
             sourceMap: true
         }),

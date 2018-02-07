@@ -43,16 +43,34 @@ class DataLocalStorage {
     setLocalStorageData(key, data) {
         if (this.isSupport) {
             this.localStorage.setItem(key, JSON.stringify(data));
+            // let expireTime = new Date().getTime() + 5 * 24 * 60 * 60 * 1000;
+            let expireTime = new Date().getTime() + 1 * 60 * 1000;
+            localStorage.setItem(key + '_expireTime', expireTime);
         }
     }
     getLocalStorageData(key, callback) {
         let getData = this.localStorage.getItem(key);
         if (this.localStorage.getItem(key)) {
-            callback(true, JSON.parse(getData));
+            if (this.localStorage.getItem(key + '_expireTime')) {
+                let thisTime = new Date().getTime();
+                let expireTime = this.localStorage.getItem(key + '_expireTime');
+                if (thisTime - expireTime > 0) {
+                    callback(false);
+                    this.deleteKey(key);
+                    this.deleteKey(key + '_expireTime');
+                } else {
+                    callback(true, JSON.parse(getData));
+                }
+            } else {
+                callback(true, JSON.parse(getData));
+            }
         }
         else {
             callback(false);
         }
+    }
+    deleteKey(key) {
+        this.localStorage.removeItem(key);
     }
 }
 
@@ -61,11 +79,11 @@ class DataLocalStorage {
  * 生成唯一uuid
  * @type: 是否支持本地存储
  * 8 character ID (base=2)
- * getUuid(8, 2)  //  "01001010"
+ * getUuid(8, 2)  //  '01001010'
  * 8 character ID (base=10)
- * getUuid(8, 10) // "47473046"
+ * getUuid(8, 10) // '47473046'
  * 8 character ID (base=16)
- * getUuid(8, 16) // "098F4D35"
+ * getUuid(8, 16) // '098F4D35'
  *
  */
 window.getUuid = function(len, radix) {

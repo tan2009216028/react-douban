@@ -32,7 +32,7 @@ export default class HomeController extends React.Component {
                         <div className="douban-loading">
                             <img src="../../static/loading_green.gif" alt="loading" />
                         </div>
-                    } >
+                    }>
                     <HomeList getListArr={this.activityStore.actState.list} />
                 </InfiniteScroll>
                 <Message msg="本项目仅仅作为学习交流使用，无任何商业用途！" />
