@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import HeaderBar from '../Components/header';
+import FooterBar from '../Components/footer';
 import Home from '../Pages/home';
 import Detail from '../Pages/detail';
 import Movie from '../Pages/movie';
@@ -17,6 +18,7 @@ import Search from '../Pages/search';
 import SearchDetail from '../Pages/searchDetail';
 const ControlCenter = styled.div`
   margin-top: .48rem;
+  margin-bottom: .32rem;
   overflow-x: hidden;
 `;
 @inject(['searchStore']) // inject 注入需要的store
@@ -46,6 +48,7 @@ export default class Routes extends React.Component {
                             <Redirect to="/" />
                         </Switch>
                     </ControlCenter>
+                    <FooterBar />
                     {
                         this.props.searchStore.searchData.showType && <Search getCloseSearchDialog={this.getCloseSearchDialog.bind(this)} />
                     }
