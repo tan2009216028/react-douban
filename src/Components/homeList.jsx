@@ -65,7 +65,7 @@ const HomeList = ({ getListArr }) => (
             {
                 getListArr.length > 0 && getListArr.map((item, index) => {
                     return (
-                        <li key={UUID.uuid1616()} >
+                        <li key={UUID.uuid1616() + index} id={UUID.uuid1616() + index}>
                             <Link to={{
                                 pathname: '/detailPage',
                                 search: `?activityId=${item.id}`,

@@ -6,7 +6,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { observer, inject } from 'mobx-react';
-import DownLoadApp from '../Components/downLoadApp';
 import Loading from '../Components/loading';
 import { contentImgUrlReplace } from '../Utils/util';
 const ActivityStyle = styled.div.attrs({
@@ -207,7 +206,6 @@ export default class ActivityContentLayout extends React.Component {
                 <div className="db-activity-city"><a href={this.state.cityWide} >同城</a>{this.activityDetail && <span>{this.activityDetail['loc_name']}</span>}</div>
                 {this.state.showType && <ActivityContent activityDetail={this.activityDetail} activityThisContent={this.activityThisContent} />}
                 {!this.state.showType && <Loading />}
-                <DownLoadApp />
             </ActivityStyle>
         );
     }
