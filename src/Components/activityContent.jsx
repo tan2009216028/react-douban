@@ -204,7 +204,7 @@ export default class ActivityContentLayout extends React.Component {
     render() {
         return (
             <ActivityStyle>
-                <div className="db-activity-city"><a href={this.state.cityWide} >豆瓣同城</a>{this.activityDetail && <span>{this.activityDetail['loc_name']}</span>}</div>
+                <div className="db-activity-city"><a href={this.state.cityWide} >同城</a>{this.activityDetail && <span>{this.activityDetail['loc_name']}</span>}</div>
                 {this.state.showType && <ActivityContent activityDetail={this.activityDetail} activityThisContent={this.activityThisContent} />}
                 {!this.state.showType && <Loading />}
                 <DownLoadApp />

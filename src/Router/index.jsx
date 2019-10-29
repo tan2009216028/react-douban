@@ -31,7 +31,7 @@ export default class Routes extends React.Component {
         return (
             <Router basename="/">
                 <div className="react-douban">
-                    <HeaderBar appTitle="react测试" title="我不好" />
+                    <HeaderBar appTitle="随心所想" />
                     <ControlCenter>
                         <Switch>
                             <Route exact path="/" component={Home} />
